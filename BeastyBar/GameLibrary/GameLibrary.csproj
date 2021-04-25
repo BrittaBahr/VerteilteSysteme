@@ -72,7 +72,6 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameRequest.cs" />
     <Compile Include="GameStatus.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="PlayerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleGameInformation.cs" />
