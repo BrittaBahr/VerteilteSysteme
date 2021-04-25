@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "rMwPPMKKcM8CbcV8QlbP3RWrNU/AEWD/dzZKimqC29xqpaUevcnANuERWp4HGXTr+FHSm1lB1ZJX5kJW7qAnSw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\britt\\.nuget\\packages\\fsharp.core\\4.7.0\\fsharp.core.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

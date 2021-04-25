@@ -1,0 +1,5 @@
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\LogicBeastyBarGame\obj\Debug\netcoreapp3.1\LogicBeastyBarGame.csproj.CoreCompileInputs.cache
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\LogicBeastyBarGame\obj\Debug\netcoreapp3.1\LogicBeastyBarGame.AssemblyInfoInputs.cache
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\LogicBeastyBarGame\obj\Debug\netcoreapp3.1\LogicBeastyBarGame.AssemblyInfo.cs
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\LogicBeastyBarGame\bin\Debug\netcoreapp3.1\LogicBeastyBarGame.deps.json
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\LogicBeastyBarGame\bin\Debug\netcoreapp3.1\LogicBeastyBarGame.dll
