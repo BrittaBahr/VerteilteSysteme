@@ -36,6 +36,8 @@
 
         private List<PlayerIdAnimalStruct> clubAnimals;
 
+        private ClientHandler networkClient;
+
         public BeastyBarPlayer(int playerId, string name, IBeastyBarPlayerNetworkCommunicator communicator, Random rand)
         {
             if (string.IsNullOrEmpty(name) | string.IsNullOrWhiteSpace(name))
@@ -98,6 +100,19 @@
             for (int i = 0; i < 5; i++)
             {
                 this.GetRandomHandcard();
+            }
+        }
+
+        public ClientHandler NetworkClient
+        {
+            get
+            {
+                return this.networkClient;
+            }
+
+            set
+            {
+                this.networkClient = value ?? throw new ArgumentNullException("It can not be null.");
             }
         }
 

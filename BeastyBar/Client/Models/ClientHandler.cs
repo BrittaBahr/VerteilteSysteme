@@ -1,5 +1,5 @@
 ﻿
-namespace Client
+namespace Client.Models
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,6 @@ namespace Client
     using System.Windows;
     using System.Windows.Input;
     using BeastyBarGameLogic.GamePlayer;
-    using Client.Models;
     using Client.Services;
     using Client.ViewModels;
     using Client;
@@ -27,7 +26,7 @@ namespace Client
     /// Represents the main view model for the client game.
     /// </summary>
     /// <seealso cref="Client.ViewModels" />
-    public class ClientVM
+    public class ClientHandler
     {
         /// <summary>
         /// This field is used to save the URL service.
@@ -90,12 +89,7 @@ namespace Client
 
         private RestService restService = new RestService();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ClientVM"/> class.
-        /// </summary>
-        /// <param name="urlService">The URL service.</param>
-        /// <param name="logger">The logger.</param>
-        public ClientVM(UrlService urlService)
+        public ClientHandler(UrlService urlService)
         {
             this.timer = new System.Timers.Timer();
             this.urlService = urlService;
