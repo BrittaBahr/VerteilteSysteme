@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Text;
-    using GameStartVM.ClassesForView;
-    using GameStartVM.ViewModel.Events;
+    using Client.ClassesForView;
 
     public class CardVM : INotifyPropertyChanged
     {
@@ -26,8 +25,6 @@
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public event EventHandler<CardHeightChangedEventArgs> CardHeightChanged;
 
         public AnimalVM Animal
         {
@@ -82,11 +79,6 @@
         protected virtual void OnPropertyChanged(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected virtual void OnCardHeightChanged(double height)
-        {
-            this.CardHeightChanged?.Invoke(this, new CardHeightChangedEventArgs(height));
         }
     }
 }

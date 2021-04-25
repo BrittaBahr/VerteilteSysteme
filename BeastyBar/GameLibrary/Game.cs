@@ -25,17 +25,17 @@ namespace GameLibrary
         /// <summary>
         /// This field is used to save player two.
         /// </summary>
-        private Player playerTwo;
+        //private Player playerTwo;
 
-        /// <summary>
-        /// This field is used to save player one.
-        /// </summary>
-        private Player playerOne;
+        ///// <summary>
+        ///// This field is used to save player one.
+        ///// </summary>
+        //private Player playerOne;
 
-        /// <summary>
-        /// This field is used to save the current player.
-        /// </summary>
-        private Player currentPlayer;
+        ///// <summary>
+        ///// This field is used to save the current player.
+        ///// </summary>
+        //private Player currentPlayer;
 
         /// <summary>
         /// This field is used to save the indexed game.
@@ -47,7 +47,7 @@ namespace GameLibrary
         /// </summary>
         /// <param name="one">The first player.</param>
         /// <param name="two">The second player.</param>
-        public Game(Player one, Player two)
+        public Game(/*Player one, Player two*/)
         {
             this.winConditions = new List<WinCondition>()
             {
@@ -61,11 +61,11 @@ namespace GameLibrary
                 new WinCondition(2, 4, 6)
             };
 
-            this.playerOne = one;
-            this.playerTwo = two;
-            this.PlayerOne.Marker = 1;
-            this.PlayerTwo.Marker = 2;
-            this.CurrentPlayer = this.playerOne;
+            //this.playerOne = one;
+            //this.playerTwo = two;
+            //this.PlayerOne.Marker = 1;
+            //this.PlayerTwo.Marker = 2;
+            //this.CurrentPlayer = this.playerOne;
             this.GameOver = false;
             this.EndMessage = string.Empty;
 
@@ -113,18 +113,18 @@ namespace GameLibrary
         /// The current player.
         /// </value>
         /// <exception cref="ArgumentNullException">CurrentPlayer - The current player can´t be null.</exception>
-        public Player CurrentPlayer
-        {
-            get
-            {
-                return this.currentPlayer;
-            }
+        //public Player CurrentPlayer
+        //{
+        //    get
+        //    {
+        //        return this.currentPlayer;
+        //    }
 
-            set
-            {
-                this.currentPlayer = value ?? throw new ArgumentNullException(nameof(this.CurrentPlayer), "The current player can´t be null.");
-            }
-        }
+        //    set
+        //    {
+        //        this.currentPlayer = value ?? throw new ArgumentNullException(nameof(this.CurrentPlayer), "The current player can´t be null.");
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets the player one.
@@ -133,18 +133,18 @@ namespace GameLibrary
         /// The player one.
         /// </value>
         /// <exception cref="ArgumentNullException">PlayerOne - Player one can´t be null.</exception>
-        public Player PlayerOne
-        {
-            get
-            {
-                return this.playerOne;
-            }
+        //public Player PlayerOne
+        //{
+        //    get
+        //    {
+        //        return this.playerOne;
+        //    }
 
-            set
-            {
-                this.playerOne = value ?? throw new ArgumentNullException(nameof(this.PlayerOne), "Player one can´t be null.");
-            }
-        }
+        //    set
+        //    {
+        //        this.playerOne = value ?? throw new ArgumentNullException(nameof(this.PlayerOne), "Player one can´t be null.");
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets the player two.
@@ -153,18 +153,18 @@ namespace GameLibrary
         /// The player two.
         /// </value>
         /// <exception cref="ArgumentNullException">PlayerTwo - Player two can´t be null.</exception>
-        public Player PlayerTwo
-        {
-            get
-            {
-                return this.playerTwo;
-            }
+        //public Player PlayerTwo
+        //{
+        //    get
+        //    {
+        //        return this.playerTwo;
+        //    }
 
-            set
-            {
-                this.playerTwo = value ?? throw new ArgumentNullException(nameof(this.PlayerTwo), "Player two can´t be null.");
-            }
-        }
+        //    set
+        //    {
+        //        this.playerTwo = value ?? throw new ArgumentNullException(nameof(this.PlayerTwo), "Player two can´t be null.");
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets a value indicating whether the game is over.
@@ -206,8 +206,8 @@ namespace GameLibrary
         {
             this.GameOver = false;
             this.CurrentGameStatus = new int[9];
-            this.PlayerOne.MarkedPositions = new List<int>();
-            this.PlayerTwo.MarkedPositions = new List<int>();
+            //this.PlayerOne.MarkedPositions = new List<int>();
+            //this.PlayerTwo.MarkedPositions = new List<int>();
             this.EndMessage = string.Empty;
             this.Turns = 0;
         }
@@ -228,16 +228,16 @@ namespace GameLibrary
                     {
                         foreach (var index in condition.Condition)
                         {
-                            if (this.CurrentPlayer.MarkedPositions.Contains(index))
-                            {
-                                isWin = true;
-                                continue;
-                            }
-                            else
-                            {
-                                isWin = false;
-                                break;
-                            }
+                            //if (this.CurrentPlayer.MarkedPositions.Contains(index))
+                            //{
+                            //    isWin = true;
+                            //    continue;
+                            //}
+                            //else
+                            //{
+                            //    isWin = false;
+                            //    break;
+                            //}
                         }
 
                         if (isWin)
@@ -251,8 +251,8 @@ namespace GameLibrary
             if (isWin)
             {
                 this.GameOver = true;
-                this.CurrentPlayer.Wins++;
-                this.EndMessage = $"{this.CurrentPlayer.PlayerName} wins!";
+                //this.CurrentPlayer.Wins++;
+                //this.EndMessage = $"{this.CurrentPlayer.PlayerName} wins!";
                 return isWin;
             }
 
@@ -274,7 +274,7 @@ namespace GameLibrary
         /// <returns>
         ///   <c>true</c> if move is valid; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsMoveValid(int updatedPosition, Player player)
+        public bool IsMoveValid(int updatedPosition/*, Player player*/)
         {
             if (updatedPosition < 0 || updatedPosition >= 9)
             {
@@ -286,10 +286,10 @@ namespace GameLibrary
                 return false;
             }
 
-            if (this.CurrentPlayer != player)
-            {
-                return false;
-            }
+            //if (this.CurrentPlayer != player)
+            //{
+            //    return false;
+            //}
 
             return true;
         }
@@ -303,17 +303,17 @@ namespace GameLibrary
         ///     <c>true</c> if game if finished; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="InvalidOperationException">Invalid move was tried.</exception>
-        public bool MakeMove(int updatedPosition, Player player)
+        public bool MakeMove(int updatedPosition /*Player player*/)
         {
-            if (this.IsMoveValid(updatedPosition, player))
+            if (this.IsMoveValid(updatedPosition /*player*/))
             {
-                this.CurrentGameStatus[updatedPosition] = this.CurrentPlayer.Marker;
-                this.CurrentPlayer.MarkedPositions.Add(updatedPosition);
+                //this.CurrentGameStatus[updatedPosition] = this.CurrentPlayer.Marker;
+                //this.CurrentPlayer.MarkedPositions.Add(updatedPosition);
                 this.Turns++;
 
                 var gameFinished = this.CheckWinConditions();
 
-                this.CurrentPlayer = this.GetOtherPlayer(player);
+                //this.CurrentPlayer = this.GetOtherPlayer(player);
 
                 return gameFinished;
             }
@@ -326,9 +326,9 @@ namespace GameLibrary
         /// </summary>
         /// <param name="player">The given player.</param>
         /// <returns>The enemy of the given player.</returns>
-        private Player GetOtherPlayer(Player player)
-        {
-            return (player == this.PlayerOne) ? this.PlayerTwo : this.PlayerOne;
-        }
+        //private Player GetOtherPlayer(Player player)
+        //{
+        //    return (player == this.PlayerOne) ? this.PlayerTwo : this.PlayerOne;
+        //}
     }
 }

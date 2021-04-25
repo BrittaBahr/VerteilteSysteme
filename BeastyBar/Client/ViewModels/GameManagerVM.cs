@@ -4,15 +4,21 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
+    using System.Linq;
     using System.Windows.Media;
     using BeastyBarGameLogic.Animals;
     using BeastyBarGameLogic.Animals.Species;
+    using BeastyBarGameLogic.GamePlayer.AnimalSettingsProvider;
     using BeastyBarGameLogic.GamePlayer.NetworkCommunication;
-    using GameStartVM.ClassesForView;
+    using Client.ClassesForView;
+    using Client.Models;
+    using Client.ViewModels.Events;
 
     public class GameManagerVM : INotifyPropertyChanged
     {
-        private Animal animal1;
+        private readonly BeastyBarPlayer model;
+
+        private readonly AlphaRedGreenBlue colour;
 
         private CardVM[] queue;
 
@@ -28,47 +34,43 @@
 
         private ConnectedPlayerVM currentPlayer;
 
-        public GameManagerVM()
+        public GameManagerVM(BeastyBarPlayer model, AlphaRedGreenBlue colour, List<ConnectedPlayerVM> otherPlayers)
         {
-            this.Animal1 = new Stunk();
-            AnimalVM a1 = new AnimalVM(new Lion());
-            AnimalVM a2 = new AnimalVM(new Hippo());
-            AnimalVM a3 = new AnimalVM(new Zebra());
-            AnimalVM a4 = new AnimalVM(new Giraffe());
-            AnimalVM b1 = new AnimalVM(new Chameleon());
-            AnimalVM b2 = new AnimalVM(new Kangaroo());
-            AnimalVM b3 = new AnimalVM(new Parrot());
-            AnimalVM b4 = new AnimalVM(new Monkey());
-            AlphaRedGreenBlue colour = new AlphaRedGreenBlue(255, 255, 0, 255);
-            CardVM c1 = new CardVM(a1, colour, this.CardHeight, this.CardWidth);
-            CardVM c2 = new CardVM(a2, colour, this.CardHeight, this.CardWidth);
-            CardVM c3 = new CardVM(a3, colour, this.CardHeight, this.CardWidth);
-            CardVM c4 = new CardVM(a4, colour, this.CardHeight, this.CardWidth);
-            CardVM c5 = new CardVM(null, colour, this.CardHeight, this.CardWidth);
+            this.model = model ?? throw new ArgumentNullException(nameof(model));
+            this.model.AnimalAnimalSettingsAreNeeded += ModelAnimalAnimalSettingsAreNeeded;
+            this.colour = colour;
+            this.OtherPlayers = otherPlayers;
+            this.Handcards = this.model.Handcards.Select(x => new CardVM(new AnimalVM(x), this.colour, this.CardHeight, this.CardWidth)).ToArray();
+            List<CardVM> list = this.model.Queue.Select(x => new CardVM(new AnimalVM(x.Animal), this.GetColourFromPlayerId(x.PlayerId), this.CardHeight, this.CardWidth)).ToList();
+            CardVM[] arr = new CardVM[5];
 
-            this.CurrentPlayer = new ConnectedPlayerVM(0, "Svenja", new AlphaRedGreenBlue(255, 51, 51, 255));
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                if (i < list.Count)
+                {
+                    arr[i] = list.ElementAt(i);
+                    continue;
+                }
 
-            this.CardHeight = 200;
-            this.CardWidth = 150;
-            this.Queue = new CardVM[]
-            {
-                c1, c2, c3, c4, c5
-            };
-            this.Handcards = new CardVM[]
-            {
-                new CardVM(b1, colour, this.CardHeight, this.CardWidth),
-                new CardVM(b2, colour, this.CardHeight, this.CardWidth),
-                new CardVM(b3, colour, this.CardHeight, this.CardWidth),
-                new CardVM(b4, colour, this.CardHeight, this.CardWidth)
-            };
+                arr[i] = new CardVM(null, new AlphaRedGreenBlue(255, 96, 96, 96), this.CardHeight, this.CardWidth);
+            }
 
-            this.OtherPlayers = new List<ConnectedPlayerVM>()
-            {
-                new ConnectedPlayerVM(0, "Borni", new AlphaRedGreenBlue(255, 255, 0, 25)),
-                new ConnectedPlayerVM(0, "Dani", new AlphaRedGreenBlue(255, 0, 255, 25)),
-                new ConnectedPlayerVM(0, "Hendrik", new AlphaRedGreenBlue(255, 0, 0, 255)),
-                new ConnectedPlayerVM(0, "Britta", new AlphaRedGreenBlue(255, 30, 50, 25))
-            };
+            this.Queue = arr;
+        }
+
+        public event EventHandler<GameManagerAnimalAnimalSettingsAreNeededEventArgs> AnimalAnimalSettingsAreNeeded;
+
+        public event EventHandler<GameManagerIntAnimalSettingsAreNeededEventArgs> IntAnimalSettingsAreNeeded;
+
+        public event EventHandler<GameManagerAnimalsEnteredClubEventArgs> AnimalsEnteredClub;
+
+        public event EventHandler<GameManagerAnimalsDiedEventArgs> AnimalsDied;
+
+        public event EventHandler<GameManagerGameEndedEventArgs> GameEnded;
+
+        private void ModelAnimalAnimalSettingsAreNeeded(object sender, BeastyBarGameLogic.GamePlayer.GamePlayerEventArgs.AnimalAnimalSettingsAreNeededEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,20 +80,6 @@
             get
             {
                 return new SolidColorBrush(Color.FromArgb(150, 204, 229, 255));
-            }
-        }
-
-        public Animal Animal1
-        {
-            get
-            {
-                return this.animal1;
-            }
-
-            set
-            {
-                this.animal1 = value;
-                this.OnPropertyChanged(nameof(this.Animal1));
             }
         }
 
@@ -122,7 +110,7 @@
                 this.OnPropertyChanged(nameof(this.Handcards));
             }
         }
-        
+
         public string PathToClubImage
         {
             get
@@ -247,9 +235,47 @@
             }
         }
 
+        private AlphaRedGreenBlue GetColourFromPlayerId(int playerId)
+        {
+            ConnectedPlayerVM p = this.OtherPlayers.Find(x => x.PlayerId == playerId);
+
+            if (p == null)
+            {
+                //throw new ArgumentNullException("This was not a vlid playerId", nameof(p));
+                return new AlphaRedGreenBlue(255, 0, 0, 0);
+            }
+
+            return p.Colour;
+        }
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected virtual void OnAnimalAnimalSettingsAreNeeded(AnimalAnimalSettingsProvider settings)
+        {
+            this.AnimalAnimalSettingsAreNeeded?.Invoke(this, new GameManagerAnimalAnimalSettingsAreNeededEventArgs(settings));
+        }
+
+        protected virtual void OnIntAnimalSettingsAreNeeded(IntAnimalSettingsProvider settings)
+        {
+            this.IntAnimalSettingsAreNeeded?.Invoke(this, new GameManagerIntAnimalSettingsAreNeededEventArgs(settings));
+        }
+
+        protected virtual void OnAnimalsEnteredClub(List<PlayerIdAnimalStruct> enteredAnimals)
+        {
+            this.AnimalsEnteredClub?.Invoke(this, new GameManagerAnimalsEnteredClubEventArgs(enteredAnimals));
+        }
+
+        protected virtual void OnAnimalsDied(List<AnimalVM> diedAnimals)
+        {
+            this.AnimalsDied?.Invoke(this, new GameManagerAnimalsDiedEventArgs(diedAnimals));
+        }
+
+        protected virtual void OnGameEnded(List<VictoryPlayerStruct> clubAnimals)
+        {
+            this.GameEnded?.Invoke(this, new GameManagerGameEndedEventArgs(clubAnimals));
         }
     }
 }

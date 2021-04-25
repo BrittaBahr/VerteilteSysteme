@@ -702,6 +702,9 @@
         }
       },
       "BeastyBarGameLogic/1.0.0": {
+        "dependencies": {
+          "GameLibrary": "1.0.0"
+        },
         "runtime": {
           "BeastyBarGameLogic.dll": {}
         }

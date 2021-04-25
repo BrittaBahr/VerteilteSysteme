@@ -3,8 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using BeastyBarGameLogic.GamePlayer.NetworkCommunication;
-    using GameStartVM.ClassesForView;
+    using Client.ClassesForView;
 
     public class ConnectedPlayerVM
     {
