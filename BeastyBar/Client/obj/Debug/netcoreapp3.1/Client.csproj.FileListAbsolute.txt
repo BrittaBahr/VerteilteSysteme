@@ -1,0 +1,6 @@
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\Client_MarkupCompile.cache
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\Client_MarkupCompile.lref
