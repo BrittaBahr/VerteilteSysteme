@@ -6,7 +6,7 @@
       "version": "3.1.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\SvenjaBahr\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\britt\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\SvenjaBahr\\.nuget\\packages"
     ],
     "configProperties": {
