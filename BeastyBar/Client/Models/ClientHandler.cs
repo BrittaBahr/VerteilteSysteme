@@ -99,11 +99,6 @@ namespace Client.Models
             // object as a command parameter is needed because:
             // when a xaml object calls a command, the object needs to be relayed to the command method.
             this.SetupCommand = new Command(async obj => await this.Setup());
-            this.AcceptCommand = new Command(async obj => await this.ExecuteAcceptCommand());
-            this.StartGameCommand = new Command(async obj => await this.ExecuteStartGame());
-            this.DeclineCommand = new Command(async obj => await this.ExecuteDeclineCommand());
-            this.ReturnToLobbyCommand = new Command(async obj => await this.ExecuteReturnToLobbyCommand());
-            this.ConnectCommand = new Command(async obj => await this.ExecuteConnectCommand());
         }
 
         /// <summary>
@@ -424,7 +419,7 @@ namespace Client.Models
                     {
                         this.timer.Stop();
                         this.StatusMessage = "Game ended because of inactivity.";
-                        await this.ExecuteReturnToLobbyCommand();
+                        //await this.ExecuteReturnToLobbyCommand();
                     };
                 });
 
@@ -441,15 +436,6 @@ namespace Client.Models
         private void OnStatusMessageReceived(string message)
         {
             this.StatusMessage = message;
-        }
-
-        /// <summary>
-        /// Called when an enemy has left the game. Resets the properties responsible for the view.
-        /// </summary>
-        private void OnEnemyLeftGame()
-        {
-            this.timer.Stop();
-            this.StatusMessage = "Enemy left the game.";
         }
 
         /// <summary>
@@ -494,119 +480,6 @@ namespace Client.Models
             }
         }
 
-        /// <summary>
-        /// This command is used when the player types in his username and connects to the server.
-        /// A request will be sent to the server containing the client player name.
-        /// </summary>
-        /// <returns>A Task that represents the asynchronous method.</returns>
-        private async Task ExecuteConnectCommand()
-        {
-           // this.logger.LogInformation("[ExecuteConnectCommand]");
-
-            //if (!string.IsNullOrEmpty(this.clientPlayer.PlayerName))
-            //{
-                try
-                {
-
-                   // await this.hubConnection.SendAsync("AddPlayer", this.clientPlayer.PlayerName, this.ClientId);
-
-                    this.ClientConnected = true;
-                }
-                catch (HttpRequestException)
-                {
-                    this.StatusMessage = "Unable to connect to server.";
-                }
-                catch (Exception)
-                {
-                    this.statusMessage = "An unknown error occured. Please try again later.";
-                }
-            //}
-        }
-
-        /// <summary>
-        /// When the client accepts a game request, a correspondent message is sent to the server.
-        /// </summary>
-        /// <returns>A Task that represents the asynchronous method.</returns>
-        private async Task ExecuteAcceptCommand()
-        {
-           // this.logger.LogInformation("[ExecuteAcceptCommand]");
-            this.GameWasRequested = false;
-
-            try
-            {
-                await this.hubConnection.SendAsync("DeclineOrAcceptRequest", this.RequestID, true);
-            }
-            catch (HttpRequestException)
-            {
-                this.StatusMessage = "Unable to reach server. Please try again later.";
-            }
-            catch (Exception)
-            {
-                this.statusMessage = "An unknown error occured. Please try again later.";
-            }
-
-            //NEW
-            this.ActiveStatus = false;
-        }
-
-        /// <summary>
-        /// When the client declines a game request, a correspondent message is sent to the server.
-        /// The requesting player is set to default (null) and the game request boolean is set to false.
-        /// </summary>
-        /// <returns>A Task that represents the asynchronous method.</returns>
-        private async Task ExecuteDeclineCommand()
-        {
-            //this.logger.LogInformation("[ExecuteDeclineCommand]");
-            this.GameWasRequested = false;
-           // this.RequestingOrEnemyPlayer = default;
-
-            try
-            {
-                await this.hubConnection.SendAsync("DeclineOrAcceptRequest", this.RequestID, false);
-            }
-            catch (HttpRequestException)
-            {
-                this.StatusMessage = "Unable to reach server. Please try again later.";
-            }
-            catch (Exception)
-            {
-                this.statusMessage = "An unknown error occured. Please try again later.";
-            }
-
-            this.RequestID = 0;
-            this.ActiveStatus = false;
-        }
-
-        /// <summary>
-        /// This command is used when the player using the client clicks on the return to lobby button.
-        /// The game on the client is reset and a request will be sent to the server containing the id of the client player and the id of the enemy player.
-        /// </summary>
-        /// <returns>A Task that represents the asynchronous method.</returns>
-        private async Task ExecuteReturnToLobbyCommand()
-        {
-            this.timer.Stop();
-            this.timer = new System.Timers.Timer { AutoReset = false };
-            this.myTurn = false;
-
-            //this.logger.LogInformation("[ExecuteReturnToLobbyCommand]");
-
-            Application.Current.Dispatcher.Invoke(new ThreadStart(() =>
-            {
-            }));
-
-            try
-            {
-             //   await this.hubConnection.SendAsync("ReturnToLobby", this.ClientPlayer.Player.ConnectionId, this.RequestingOrEnemyPlayer.Player.ConnectionId);
-            }
-            catch (HttpRequestException)
-            {
-                this.StatusMessage = "Unable to reach server. Please try again later.";
-            }
-            catch (Exception)
-            {
-                this.statusMessage = "An unknown error occured. Please try again later.";
-            }
-        }
 
         /// <summary>
         /// This command is used when a game element button is clicked.
@@ -651,16 +524,6 @@ namespace Client.Models
                         }
                     }
                 //}                  
-        }
-
-        /// <summary>
-        /// This command is used to start the game with the online players
-        /// A game request will be sent to the server containing the id of the enemy player and the id of the client player.
-        /// </summary>
-        /// <returns>A Task that represents the asynchronous method.</returns>
-        private async Task ExecuteStartGame()
-        {
-
         }
     }
 }
