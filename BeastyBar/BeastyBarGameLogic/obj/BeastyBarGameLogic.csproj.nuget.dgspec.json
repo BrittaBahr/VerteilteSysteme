@@ -31,11 +31,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {
-              "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-                "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -63,17 +59,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
-      }
-    },
-    "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj",
-        "projectName": "GameLibrary",
-        "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
-      },
-      "frameworks": {
-        "net472": {}
       }
     }
   }

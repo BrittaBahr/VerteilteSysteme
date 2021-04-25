@@ -31,11 +31,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {
-              "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-                "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {

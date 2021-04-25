@@ -71,7 +71,7 @@
     <Compile Include="ApiResponse.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameRequest.cs" />
-    <Compile Include="GameStatus.cs" />
+    <Compile Include="MessageData.cs" />
     <Compile Include="PlayerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleGameInformation.cs" />
@@ -81,6 +81,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BeastyBarGameLogic\BeastyBarGameLogic.csproj">
+      <Project>{b78897d7-5790-495d-a8d8-fe6154e1dc89}</Project>
+      <Name>BeastyBarGameLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

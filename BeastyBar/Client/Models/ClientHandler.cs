@@ -94,7 +94,6 @@ namespace Client.Models
             this.timer = new System.Timers.Timer();
             this.urlService = urlService;
             this.ClientConnected = false;
-            this.GameWasRequested = false;
 
             // object as a command parameter is needed because:
             // when a xaml object calls a command, the object needs to be relayed to the command method.
@@ -114,66 +113,6 @@ namespace Client.Models
         /// </value>
         public ICommand SetupCommand { get; }
 
-        /// <summary>
-        /// Gets the accept command.
-        /// When the client accepts a game request, a correspondent message is sent to the server.
-        /// </summary>
-        /// <value>
-        /// The accept command.
-        /// </value>
-        public ICommand AcceptCommand { get; }
-
-        /// <summary>
-        /// Gets the decline command.
-        /// When the client declines a game request, a correspondent message is sent to the server.
-        /// The requesting player is set to default (null) and the game request boolean is set to false.
-        /// </summary>
-        /// <value>
-        /// The decline command.
-        /// </value>
-        public ICommand DeclineCommand { get; }
-
-        /// <summary>
-        /// Gets the return to lobby command.
-        /// This command is used when the player using the client clicks on the return to lobby button.
-        /// The game on the client is reset and a request will be sent to the server containing the id of the client player and the id of the enemy player.
-        /// </summary>
-        /// <value>
-        /// The return to lobby command.
-        /// </value>
-        public ICommand ReturnToLobbyCommand { get; }
-
-        /// <summary>
-        /// Gets the request game command.
-        /// This command is used when the player using the client requests a game with another online player.
-        /// A game request will be sent to the server containing the id of the enemy player and the id of the client player.
-        /// </summary>
-        /// <value>
-        /// The request game command.
-        /// </value>
-        public ICommand StartGameCommand { get; }
-
-        /// <summary>
-        /// Gets the connect command.
-        /// This command is used when the player types in his username and connects to the server.
-        /// A request will be sent to the server containing the client player name.
-        /// </summary>
-        /// <value>
-        /// The connect command.
-        /// </value>
-        public ICommand ConnectCommand { get; }
-
-        public string Token
-        {
-            get
-            {
-                return this.myAccessToken;
-            }
-            set
-            {
-                this.myAccessToken = value;
-            }
-        }
 
         /// <summary>
         /// Gets or sets the current game status.
@@ -181,34 +120,7 @@ namespace Client.Models
         /// <value>
         /// The current game status.
         /// </value>
-        public GameStatus CurrentGameStatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets the request identifier.
-        /// </summary>
-        /// <value>
-        /// The request identifier.
-        /// </value>
-        public int RequestID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the active player.
-        /// </summary>
-        /// <value>
-        /// The name of the active player.
-        /// </value>
-        public string ActivePlayerName
-        {
-            get
-            {
-                return this.activePlayerName;
-            }
-
-            set
-            {
-                this.activePlayerName = value;
-            }
-        }
+        public MessageData CurrentGameStatus { get; set; }
 
         /// <summary>
         /// Gets or sets a specific status message to display in the client.
@@ -236,30 +148,6 @@ namespace Client.Models
                         await Task.Delay(10000);
                         this.StatusMessage = string.Empty;
                     });
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether a game with the client has been requested by another player.
-        /// Needed for UI representation.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if game was requested; otherwise, <c>false</c>.
-        /// </value>
-        public bool GameWasRequested
-        {
-            get
-            {
-                return this.gameWasRequested;
-            }
-
-            set
-            {
-                this.gameWasRequested = value;
-                if (value)
-                {
-                    this.ActiveStatus = true;
                 }
             }
         }
@@ -302,13 +190,8 @@ namespace Client.Models
                     .WithUrl(this.urlService.LobbyAddress)
                     .Build();
 
-                //this.hubConnection.On<List<Player>>("ReceivePlayersAsync", this.OnPlayersReceived);
-                this.hubConnection.On<GameRequest>("GameRequested", this.OnGameRequestReceived);
-                //this.hubConnection.On<Player>("ReturnPlayerInstance", this.OnClientPlayerInstanceReturned);
                 this.hubConnection.On<string>("StatusMessage", this.OnStatusMessageReceived);
-                this.hubConnection.On<GameStatus>("GameStatus", this.OnGameStatusReceived);
-                this.hubConnection.On("EnemyLeftGame", this.OnEnemyLeftGame);
-                this.hubConnection.On("DuplicateName", this.OnDuplicateName);
+                this.hubConnection.On<MessageData>("GameStatus", this.OnGameStatusReceived);
 
                 await this.hubConnection.StartAsync();
             }
@@ -323,28 +206,10 @@ namespace Client.Models
         }
 
         /// <summary>
-        /// Called when the client player instance is returned in order to obtain the clients connection id.
-        /// </summary>
-        /// <param name="player">The client player.</param>
-        private void OnClientPlayerInstanceReturned(BeastyBarPlayer player)
-        {
-            //this.ClientPlayer.Player = player;
-        }
-
-        /// <summary>
-        /// Called when a name already in the list of players has been chosen.
-        /// </summary>
-        private void OnDuplicateName()
-        {
-            this.ClientConnected = false;
-            this.StatusMessage = "Duplicate name, please choose a new one.";
-        }
-
-        /// <summary>
         /// Called when a game status has been received from the server.
         /// </summary>
         /// <param name="status">The status.</param>
-        private void OnGameStatusReceived(GameStatus status)
+        private void OnGameStatusReceived(MessageData status)
         {
             //this.logger.LogInformation("[OnGameStatusReceived] GameId: {0}", new object[] { status.GameId });
             
@@ -419,7 +284,6 @@ namespace Client.Models
                     {
                         this.timer.Stop();
                         this.StatusMessage = "Game ended because of inactivity.";
-                        //await this.ExecuteReturnToLobbyCommand();
                     };
                 });
 
@@ -438,48 +302,6 @@ namespace Client.Models
             this.StatusMessage = message;
         }
 
-        /// <summary>
-        /// Called when a game request has been received from the server. Sets the properties for the view to enable declining or accepting.
-        /// </summary>
-        /// <param name="gameRequest">The game request.</param>
-        private void OnGameRequestReceived(GameRequest gameRequest)
-        {
-            //if (gameRequest.Enemy != null)
-            //{
-               // this.RequestingOrEnemyPlayer = new PlayerVM(gameRequest.RequestingPlayer);
-                this.GameWasRequested = true;
-                this.RequestID = gameRequest.RequestID;
-
-                // allow the player to accept or decline a game for 10 seconds (timeout)
-                var task = Task.Run(() =>
-                {
-                    var aTimer = new System.Timers.Timer(95000) { AutoReset = false };
-
-                    aTimer.Start();
-
-                    aTimer.Elapsed += (sender, e) =>
-                    {
-                        this.GameWasRequested = false;
-
-                        //NEW
-                        this.ActiveStatus = false;
-                    };
-                });
-            //}
-        }
-
-        /// <summary>
-        /// Called when the list of players has been received from the server.
-        /// </summary>
-        /// <param name="players">The players.</param>
-        private void OnPlayersReceived(List<BeastyBarPlayer> players)
-        {
-            if (this.ClientConnected)
-            {
-                //this.logger.LogInformation("[OnPlayersReceived]");
-            }
-        }
-
 
         /// <summary>
         /// This command is used when a game element button is clicked.
@@ -491,9 +313,6 @@ namespace Client.Models
         {
             this.timer.Stop();
 
-           // this.logger.LogInformation("[ExecutePlayerClick] CellIndex: {0}", new object[] { cell.Index });
-
-
                 //if (this.GameIsActive)
                 //{
                     if (this.CurrentGameStatus.IndexedGame[cell.Index] == 0) // && this.CurrentGameStatus.CurrentPlayerId == this.ClientPlayer.Player.ConnectionId && this.myTurn)
@@ -501,7 +320,7 @@ namespace Client.Models
                         cell.PlayerMark = this.CurrentGameStatus.CurrentPlayerMarker;
                         this.myTurn = false;
 
-                        var status = new GameStatus
+                        var status = new MessageData
                         {
                            // CurrentPlayerId = this.ClientPlayer.Player.ConnectionId,
                             UpdatedPosition = cell.Index,

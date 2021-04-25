@@ -264,7 +264,7 @@ namespace Client
         /// <value>
         /// The current game status.
         /// </value>
-        public GameStatus CurrentGameStatus { get; set; }
+        public MessageData CurrentGameStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the request identifier.
@@ -483,7 +483,7 @@ namespace Client
                 this.hubConnection.On<GameRequest>("GameRequested", this.OnGameRequestReceived);
                 this.hubConnection.On<Player>("ReturnPlayerInstance", this.OnClientPlayerInstanceReturned);
                 this.hubConnection.On<string>("StatusMessage", this.OnStatusMessageReceived);
-                this.hubConnection.On<GameStatus>("GameStatus", this.OnGameStatusReceived);
+                this.hubConnection.On<MessageData>("GameStatus", this.OnGameStatusReceived);
                 this.hubConnection.On("EnemyLeftGame", this.OnEnemyLeftGame);
                 this.hubConnection.On("DuplicateName", this.OnDuplicateName);
 
@@ -530,7 +530,7 @@ namespace Client
         /// Called when a game status has been received from the server.
         /// </summary>
         /// <param name="status">The status.</param>
-        private void OnGameStatusReceived(GameStatus status)
+        private void OnGameStatusReceived(MessageData status)
         {
             this.logger.LogInformation("[OnGameStatusReceived] GameId: {0}", new object[] { status.GameId });
             
@@ -821,7 +821,7 @@ namespace Client
                         cell.PlayerMark = this.CurrentGameStatus.CurrentPlayerMarker;
                         this.myTurn = false;
 
-                        var status = new GameStatus
+                        var status = new MessageData
                         {
                             CurrentPlayerId = this.ClientPlayer.Player.ConnectionId,
                             UpdatedPosition = cell.Index,

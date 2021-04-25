@@ -158,7 +158,7 @@ namespace BeastyBar.Hubs
         /// </summary>
         /// <param name="update">The GameStatus to update.</param>
         /// <returns>A Task that represents the asynchronous method.</returns>
-        public async Task UpdateGameStatus(GameStatus update)
+        public async Task UpdateGameStatus(MessageData update)
         {
             var games = new List<Game>(await this.mainService.GetGamesAsync());
             var game = games.SingleOrDefault(g => g.GameId == update.GameId);
@@ -297,9 +297,9 @@ namespace BeastyBar.Hubs
         /// <param name="isNewGame">If set to <c>true</c> [is new game].</param>
         /// <param name="updatedPosition">The updated position in the field.</param>
         /// <returns>The new game status.</returns>
-        private GameStatus CreateNewGameStatus(Game game, bool isNewGame, int updatedPosition = -1)
+        private MessageData CreateNewGameStatus(Game game, bool isNewGame, int updatedPosition = -1)
         {
-            var gameStatus = new GameStatus(game.CurrentGameStatus, game.CurrentPlayer.ConnectionId, game.CurrentPlayer.Marker, game.GameId, game.PlayerOne.Wins, game.PlayerTwo.Wins)
+            var gameStatus = new MessageData(game.CurrentGameStatus, game.CurrentPlayer.ConnectionId, game.CurrentPlayer.Marker, game.GameId, game.PlayerOne.Wins, game.PlayerTwo.Wins)
             {
                 UpdatedPosition = updatedPosition
             };
