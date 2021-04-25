@@ -2,7 +2,7 @@
 {
     using System;
     using BeastyBarGameLogic.GamePlayer;
-    using Client.ClassesForView;
+    using GameStartVM.ClassesForView;
 
     public class BeatyBarPlayerVM
     {

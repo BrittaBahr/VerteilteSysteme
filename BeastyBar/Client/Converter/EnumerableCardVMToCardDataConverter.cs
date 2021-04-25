@@ -9,8 +9,8 @@
     using System.Windows.Data;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using Client.ClassesForView;
-    using Client.ViewModel;
+    using GameStartVM.ClassesForView;
+    using GameStartVM.ViewModel;
 
     public class EnumerableCardVMToCardDataConverter : IValueConverter
     {

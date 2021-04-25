@@ -10,7 +10,7 @@ namespace Client.ViewModels
     /// <summary>
     /// Represents a view model for a player.
     /// </summary>
-    /// <seealso cref="Client.ViewModels.BaseVM" />
+    /// <seealso cref="GameStartVM.ViewModels.BaseVM" />
     public class PlayerVM : INotifyPropertyChanged
     {
         /// <summary>

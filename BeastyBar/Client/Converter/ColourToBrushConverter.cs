@@ -8,7 +8,7 @@
     using System.Windows.Data;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using Client.ClassesForView;
+    using GameStartVM.ClassesForView;
 
     public class ColourToBrushConverter : IValueConverter
     {

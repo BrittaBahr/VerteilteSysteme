@@ -14,7 +14,7 @@ namespace Client
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Client.ViewModel;
+    using GameStartVM.ViewModel;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml

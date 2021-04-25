@@ -25,8 +25,8 @@ namespace Client
     /// <summary>
     /// Represents the main view model for the client game.
     /// </summary>
-    /// <seealso cref="Client.ViewModels.BaseVM" />
-    public class ClientVM : INotifyPropertyChanged
+    /// <seealso cref="GameStartVM.ViewModels.BaseVM" />
+    public class GameStartVM 
     {
         /// <summary>
         /// This field is used to save the URL service.
@@ -36,7 +36,7 @@ namespace Client
         /// <summary>
         /// This field is used to save the logger.
         /// </summary>
-        private readonly ILogger<ClientVM> logger;
+        private readonly ILogger<GameStartVM> logger;
 
         /// <summary>
         /// This field is used to save my access token.
@@ -142,7 +142,7 @@ namespace Client
         /// </summary>
         /// <param name="urlService">The URL service.</param>
         /// <param name="logger">The logger.</param>
-        public ClientVM(UrlService urlService, ILogger<ClientVM> logger)
+        public GameStartVM(UrlService urlService, ILogger<ClientVM> logger)
         {
             this.timer = new System.Timers.Timer();
             this.logger = logger;

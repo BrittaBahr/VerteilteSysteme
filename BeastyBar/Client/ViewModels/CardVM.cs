@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Text;
-    using Client.ClassesForView;
-    using Client.ViewModel.Events;
+    using GameStartVM.ClassesForView;
+    using GameStartVM.ViewModel.Events;
 
     public class CardVM : INotifyPropertyChanged
     {

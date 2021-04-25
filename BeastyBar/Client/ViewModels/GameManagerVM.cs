@@ -8,7 +8,7 @@
     using BeastyBarGameLogic.Animals;
     using BeastyBarGameLogic.Animals.Species;
     using BeastyBarGameLogic.GamePlayer.NetworkCommunication;
-    using Client.ClassesForView;
+    using GameStartVM.ClassesForView;
 
     public class GameManagerVM : INotifyPropertyChanged
     {
