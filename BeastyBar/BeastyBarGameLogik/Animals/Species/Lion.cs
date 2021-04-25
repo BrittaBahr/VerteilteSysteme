@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Management.Automation;
     using BeastyBarGameLogic.GamePlayer.NetworkCommunication;
 
     public class Lion : Animal

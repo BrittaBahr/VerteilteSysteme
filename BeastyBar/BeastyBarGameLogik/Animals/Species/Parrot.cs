@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Management.Automation;
     using BeastyBarGameLogic.GamePlayer.NetworkCommunication;
 
     public class Parrot : Animal
