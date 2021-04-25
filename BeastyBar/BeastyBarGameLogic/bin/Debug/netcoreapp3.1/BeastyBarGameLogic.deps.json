@@ -7,8 +7,24 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "BeastyBarGameLogic/1.0.0": {
+        "dependencies": {
+          "GameLibrary": "1.0.0"
+        },
         "runtime": {
           "BeastyBarGameLogic.dll": {}
+        }
+      },
+      "GameLibrary/1.0.0": {
+        "runtime": {
+          "GameLibrary.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
         }
       }
     }
@@ -16,6 +32,16 @@
   "libraries": {
     "BeastyBarGameLogic/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GameLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

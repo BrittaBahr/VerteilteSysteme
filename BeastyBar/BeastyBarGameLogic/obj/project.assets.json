@@ -26,27 +26,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\britt\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\SvenjaBahr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj",
+      "projectUniqueName": "C:\\Users\\SvenjaBahr\\Desktop\\DAta\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj",
       "projectName": "BeastyBarGameLogic",
-      "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj",
-      "packagesPath": "C:\\Users\\britt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\obj\\",
+      "projectPath": "C:\\Users\\SvenjaBahr\\Desktop\\DAta\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj",
+      "packagesPath": "C:\\Users\\SvenjaBahr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SvenjaBahr\\Desktop\\DAta\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\britt\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\SvenjaBahr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -57,9 +50,10 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-              "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
+            "C:\\Users\\SvenjaBahr\\Desktop\\DAta\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
+              "projectPath": "C:\\Users\\SvenjaBahr\\Desktop\\DAta\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
             }
           }
         }
@@ -72,6 +66,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "imports": [
           "net461",
           "net462",
@@ -87,7 +82,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

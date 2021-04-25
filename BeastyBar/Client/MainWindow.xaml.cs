@@ -14,7 +14,9 @@ namespace Client
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using GameStartVM.ViewModel;
+    using Client.ClassesForView;
+    using Client.Models;
+    using Client.ViewModel;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -30,7 +32,7 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
-            this.gameManagerVM = new GameManagerVM();
+            this.gameManagerVM = new GameManagerVM(new BeastyBarPlayer(0, "Svenja", null, new Random()), new AlphaRedGreenBlue(255, 20, 20, 255), new List<ConnectedPlayerVM>());
             this.DataContext = this.gameManagerVM;
         }
 

@@ -31,21 +31,16 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+                
+                <Button Grid.Row="0" Content="Spielanleitung" Margin="10" Padding="30"></Button>
 
-                <Rectangle Grid.Row="0" Fill="{Binding PathToCoverImage, Converter={StaticResource PathToBrushConv}}"  
-                   Height="150" Width="{Binding MenuWidth}" Margin="10"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                <Button Grid.Row="1" Content="Spielanleitung" Margin="10" Padding="30"></Button>
-
-                <StackPanel Grid.Row="2" Height="100" Width="Auto" Background="White" Margin="10">
+                <StackPanel Grid.Row="1" Height="100" Width="Auto" Background="White" Margin="10">
                     <TextBlock Text="On Turn: " Padding="10" FontWeight="Medium"/>
                     <TextBlock Text="{Binding CurrentPlayer.Nickname}" Padding="10" Background="{Binding CurrentPlayer.Colour, Converter={StaticResource ColourToBrushConverter}}" FontWeight="Medium" HorizontalAlignment="Center"/>
                 </StackPanel>
 
-                <ListView Grid.Row="3" Margin="10" MaxHeight="200" ItemsSource="{Binding OtherPlayers}">
+                <ListView Grid.Row="2" Margin="10" MaxHeight="200" ItemsSource="{Binding OtherPlayers}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn>

@@ -23,15 +23,15 @@ namespace GameLibrary
         /// </summary>
         /// <param name="enemy">The enemy.</param>
         /// <param name="requestPlayer">The requesting player.</param>
-        [JsonConstructor]
-        public GameRequest(Player enemy, Player requestPlayer)
-        {
-            this.Enemy = enemy;
-            this.RequestingPlayer = requestPlayer;
+        //[JsonConstructor]
+        //public GameRequest(/*Player enemy, Player requestPlayer*/)
+        //{
+        //    //this.Enemy = enemy;
+        //    //this.RequestingPlayer = requestPlayer;
 
-            Random r = new Random();
-            this.RequestID = r.Next(999, 1234567) + r.Next(999, 1234567);
-        }
+        //    Random r = new Random();
+        //    this.RequestID = r.Next(999, 1234567) + r.Next(999, 1234567);
+        //}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRequest"/> class.
@@ -70,14 +70,14 @@ namespace GameLibrary
         /// <value>
         /// The requesting player.
         /// </value>
-        public Player RequestingPlayer { get; set; }
+        //public Player RequestingPlayer { get; set; }
 
-        /// <summary>
-        /// Gets or sets the player the request is sent to.
-        /// </summary>
-        /// <value>
-        /// The player the request is sent to.
-        /// </value>
-        public Player Enemy { get; set; }
+        ///// <summary>
+        ///// Gets or sets the player the request is sent to.
+        ///// </summary>
+        ///// <value>
+        ///// The player the request is sent to.
+        ///// </value>
+        //public Player Enemy { get; set; }
     }
 }

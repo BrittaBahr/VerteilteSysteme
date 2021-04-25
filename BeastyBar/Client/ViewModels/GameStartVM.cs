@@ -478,10 +478,10 @@ namespace Client
                     .WithUrl(this.urlService.LobbyAddress)
                     .Build();
 
-                this.hubConnection.On<List<Player>>("ReceivePlayersAsync", this.OnPlayersReceived);
+                //this.hubConnection.On<List<Player>>("ReceivePlayersAsync", this.OnPlayersReceived);
                 this.hubConnection.On<List<SimpleGameInformation>>("ReceiveGames", this.OnGamesReceived);
                 this.hubConnection.On<GameRequest>("GameRequested", this.OnGameRequestReceived);
-                this.hubConnection.On<Player>("ReturnPlayerInstance", this.OnClientPlayerInstanceReturned);
+                //this.hubConnection.On<Player>("ReturnPlayerInstance", this.OnClientPlayerInstanceReturned);
                 this.hubConnection.On<string>("StatusMessage", this.OnStatusMessageReceived);
                 this.hubConnection.On<GameStatus>("GameStatus", this.OnGameStatusReceived);
                 this.hubConnection.On("EnemyLeftGame", this.OnEnemyLeftGame);
@@ -503,10 +503,10 @@ namespace Client
         /// Called when the client player instance is returned in order to obtain the clients connection id.
         /// </summary>
         /// <param name="player">The client player.</param>
-        private void OnClientPlayerInstanceReturned(Player player)
-        {
-            this.ClientPlayer.Player = player;
-        }
+        //private void OnClientPlayerInstanceReturned(Player player)
+        //{
+        //    this.ClientPlayer.Player = player;
+        //}
 
         /// <summary>
         /// Called when the client receives a list of currently running games.
@@ -536,38 +536,38 @@ namespace Client
             
             if (this.CurrentGameStatus == null || status.IsNewGame)
             {
-                if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
-                {
-                   // this.PlayerTwo = this.RequestingOrEnemyPlayer;
-                    //this.PlayerOne = this.ClientPlayer;
-                }
-                else
-                {
-                    //this.PlayerOne = this.RequestingOrEnemyPlayer;
-                   // this.PlayerTwo = this.ClientPlayer;
-                }
+                //if (/*this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId*/)
+                //{
+                //   // this.PlayerTwo = this.RequestingOrEnemyPlayer;
+                //    //this.PlayerOne = this.ClientPlayer;
+                //}
+                //else
+                //{
+                //    //this.PlayerOne = this.RequestingOrEnemyPlayer;
+                //   // this.PlayerTwo = this.ClientPlayer;
+                //}
 
                 this.GameIsActive = true;
             }
 
-            if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
-            {
-                this.myTurn = true;
-                this.timer = new System.Timers.Timer(10000) { AutoReset = false };
-                this.timer.Start();
-                this.timer.Elapsed += this.Timer_Elapsed;
-            }
+            //if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
+            //{
+            //    this.myTurn = true;
+            //    this.timer = new System.Timers.Timer(10000) { AutoReset = false };
+            //    this.timer.Start();
+            //    this.timer.Elapsed += this.Timer_Elapsed;
+            //}
 
             this.CurrentGameStatus = status;
 
-            if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
-            {
-                this.ActivePlayerName = this.ClientPlayer.PlayerName;
-            }
-            else
-            {
-                this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
-            }
+            //if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
+            //{
+            //    this.ActivePlayerName = this.ClientPlayer.PlayerName;
+            //}
+            //else
+            //{
+            //    this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
+            //}
 
             if (status.CurrentPlayerMarker == 1)
             {
@@ -644,11 +644,11 @@ namespace Client
         /// <param name="gameRequest">The game request.</param>
         private void OnGameRequestReceived(GameRequest gameRequest)
         {
-            this.logger.LogInformation("[OnGameRequestReceived] Player {0} requests a game with player {1}", new object[] { gameRequest.RequestingPlayer.PlayerName, gameRequest.Enemy.PlayerName });
+            this.logger.LogInformation("[OnGameRequestReceived] Player {0} requests a game with player {1}", new object[] { /*gameRequest.RequestingPlayer.PlayerName, gameRequest.Enemy.PlayerName*/ });
 
-            if (gameRequest.Enemy != null)
+            if (gameRequest/*.Enemy*/ != null)
             {
-                this.RequestingOrEnemyPlayer = new PlayerVM(gameRequest.RequestingPlayer);
+                //this.RequestingOrEnemyPlayer = new PlayerVM(gameRequest.RequestingPlayer);
                 this.GameWasRequested = true;
                 this.RequestID = gameRequest.RequestID;
 
@@ -674,14 +674,14 @@ namespace Client
         /// Called when the list of players has been received from the server.
         /// </summary>
         /// <param name="players">The players.</param>
-        private void OnPlayersReceived(List<Player> players)
-        {
-            if (this.ClientConnected)
-            {
-                this.logger.LogInformation("[OnPlayersReceived]");
-                this.PlayerList = this.ConvertPlayerListToPlayerVMCollection(players.Where(id => id.ConnectionId != this.ClientPlayer.Player.ConnectionId).ToList());
-            }
-        }
+        //private void OnPlayersReceived(List<Player> players)
+        //{
+        //    if (this.ClientConnected)
+        //    {
+        //        this.logger.LogInformation("[OnPlayersReceived]");
+        //        this.PlayerList = this.ConvertPlayerListToPlayerVMCollection(players.Where(id => id.ConnectionId != this.ClientPlayer.Player.ConnectionId).ToList());
+        //    }
+        //}
 
         /// <summary>
         /// This command is used when the player types in his username and connects to the server.
@@ -789,7 +789,7 @@ namespace Client
 
             try
             {
-                await this.hubConnection.SendAsync("ReturnToLobby", this.ClientPlayer.Player.ConnectionId, this.RequestingOrEnemyPlayer.Player.ConnectionId);
+                await this.hubConnection.SendAsync("ReturnToLobby" /*this.ClientPlayer.Player.ConnectionId, this.RequestingOrEnemyPlayer.Player.ConnectionId*/);
             }
             catch (HttpRequestException)
             {
@@ -816,16 +816,16 @@ namespace Client
 
                 if (this.GameIsActive)
                 {
-                    if (this.CurrentGameStatus.IndexedGame[cell.Index] == 0 && this.CurrentGameStatus.CurrentPlayerId == this.ClientPlayer.Player.ConnectionId && this.myTurn)
+                    if (this.CurrentGameStatus.IndexedGame[cell.Index] == 0 && /*this.CurrentGameStatus.CurrentPlayerId == this.ClientPlayer.Player.ConnectionId*//* &&*/ this.myTurn)
                     {
                         cell.PlayerMark = this.CurrentGameStatus.CurrentPlayerMarker;
                         this.myTurn = false;
 
                         var status = new GameStatus
                         {
-                            CurrentPlayerId = this.ClientPlayer.Player.ConnectionId,
-                            UpdatedPosition = cell.Index,
-                            GameId = this.CurrentGameStatus.GameId
+                            //CurrentPlayerId = /*this.ClientPlayer/*/*.Player.*//*ConnectionId*/,
+                            ////UpdatedPosition = cell.Index,
+                            //GameId = this.CurrentGameStatus.GameId
                         };
 
                         this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
@@ -861,13 +861,13 @@ namespace Client
         /// </summary>
         /// <param name="playerList">The player list.</param>
         /// <returns>The converted collection.</returns>
-        private ObservableCollection<PlayerVM> ConvertPlayerListToPlayerVMCollection(List<Player> playerList)
+        private ObservableCollection<PlayerVM> ConvertPlayerListToPlayerVMCollection(/*List<Player> playerList*/)
         {
             var collection = new ObservableCollection<PlayerVM>();
 
             foreach (var player in playerList)
             {
-                collection.Add(new PlayerVM(player));
+                //collection.Add(/*new PlayerVM(player)*/);
             }
 
             return collection;
@@ -876,7 +876,7 @@ namespace Client
         public void StartNewBotgame()
         {
             this.ResetField();
-            this.ClientPlayer.Player.MarkedPositions = new List<int>();
+            //this.ClientPlayer.Player.MarkedPositions = new List<int>();
             //this.PlayerOne = this.ClientPlayer;
 
             //if (this.PlayerTwo == null)
