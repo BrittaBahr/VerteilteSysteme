@@ -63,35 +63,22 @@
             Chameleon cham = new Chameleon();
             cham.AnimalAnimalSettingsAreNeeded += ChameleonFiredAnimalAnimalSettingsAreNeeded;
             cham.IntAnimalSettingsAreNeeded += ChameleonFiredIntAnimalSettingsAreNeeded;
+            this.queue = new List<PlayerIdAnimalStruct>();
             this.deck = new List<Animal>()
             {
                 new Lion(),
                 new Hippo(),
-                
+                new Crocodile(),
                 new Snake(),
-               
+                new Giraffe(),
                 new Zebra(),
-
+                new Seal(),
                 cham,
-
+                new Monkey(),
                 new Kangaroo(),
-                new Parrot()
+                new Parrot(),
+                new Stunk()
             };
-            //this.deck = new List<Animal>()
-            //{
-            //    new Lion(),
-            //    new Hippo(),
-            //    new Crocodile(),
-            //    new Snake(),
-            //    new Giraffe(),
-            //    new Zebra(),
-            //    new Seal(),
-            //    cham,
-            //    new Monkey(),
-            //    new Kangaroo(),
-            //    new Parrot(),
-            //    new Stunk()
-            //};
 
             this.Handcards = new List<Animal>();
 

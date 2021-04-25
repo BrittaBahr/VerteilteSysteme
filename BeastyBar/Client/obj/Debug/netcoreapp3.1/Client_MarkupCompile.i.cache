@@ -1,19 +1,19 @@
 ﻿Client
-
+1.0.0.0
 
 winexe
 C#
 .cs
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\
+C:\Users\SvenjaBahr\Desktop\GIIIT\VerteilteSysteme\BeastyBar\Client\obj\Debug\netcoreapp3.1\
 Client
 none
 false
-TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\Client\App.xaml
-2118311915
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
+C:\Users\SvenjaBahr\Desktop\GIIIT\VerteilteSysteme\BeastyBar\Client\App.xaml
+21424810217
 
-31-1064083788
-235-1663321237
+361760250261
+235988597987
 MainWindow.xaml;Resources\Styles.xaml;
 
 False

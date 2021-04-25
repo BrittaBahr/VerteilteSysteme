@@ -14,6 +14,8 @@ namespace Client
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
+    using BeastyBarGameLogic.GamePlayer;
+    using Client.ClassesForView;
     using Client.ViewModel;
 
     /// <summary>
@@ -30,7 +32,7 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
-            this.gameManagerVM = new GameManagerVM();
+            this.gameManagerVM = new GameManagerVM(new BeastyBarPlayer(0, "Svenja", null, new Random()), new AlphaRedGreenBlue(255, 20, 20, 255), new List<ConnectedPlayerVM>());
             this.DataContext = this.gameManagerVM;
         }
 

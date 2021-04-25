@@ -31,13 +31,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
-                <Rectangle Grid.Row="0" Fill="{Binding PathToCoverImage, Converter={StaticResource PathToBrushConv}}"  
-                   Height="150" Width="{Binding MenuWidth}" Margin="10"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+                
                 <Button Grid.Row="1" Content="Spielanleitung" Margin="10" Padding="30"></Button>
 
                 <StackPanel Grid.Row="2" Height="100" Width="Auto" Background="White" Margin="10">

@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj": {}
+    "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj": {
+    "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj",
+        "projectUniqueName": "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj",
         "projectName": "BeastyBar",
-        "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj",
-        "packagesPath": "C:\\Users\\britt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBar\\obj\\",
+        "projectPath": "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\BeastyBar\\BeastyBar.csproj",
+        "packagesPath": "C:\\Users\\SvenjaBahr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\BeastyBar\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\britt\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\SvenjaBahr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -31,9 +26,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-                "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
+              "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
+                "projectPath": "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
               }
             }
           }
@@ -46,6 +42,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -118,16 +115,15 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-      "version": "1.0.0",
+    "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj",
         "projectName": "GameLibrary",
-        "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
+        "projectPath": "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
       },
       "frameworks": {
         "net472": {}
