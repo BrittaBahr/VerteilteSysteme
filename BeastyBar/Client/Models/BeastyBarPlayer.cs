@@ -1,4 +1,4 @@
-﻿namespace BeastyBarGameLogic.GamePlayer
+﻿namespace Client.Models
 {
     using System;
     using System.Collections.Generic;
