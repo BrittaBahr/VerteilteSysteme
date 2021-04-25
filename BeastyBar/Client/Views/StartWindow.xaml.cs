@@ -28,7 +28,7 @@ namespace Client.Views
 
         public StartWindow()
         {
-            InitializeComponent();
+           // InitializeComponent();
             IHost host = Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
@@ -43,8 +43,8 @@ namespace Client.Views
 
         private void LoginManagement_OnSuccessfulAuthentication(object sender, Models.AuthEventArgs e)
         {
-            var mainWindow = new MainWindow(e.Id, e.Name, e.Token);
-            mainWindow.Show();
+            //var mainWindow = new MainWindow(e.Id, e.Name, e.Token);
+            //mainWindow.Show();
             this.Close();
         }
 

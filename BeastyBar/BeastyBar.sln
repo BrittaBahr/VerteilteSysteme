@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeastyBar", "BeastyBar\Beas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\GameLibrary.csproj", "{7A70FB3F-8004-409A-B92D-F9131E43F3F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeastyBarGameLogic", "..\..\..\Downloads\BeastyBar_Stand Spiellogik funkt\BeastyBar\BeastyBarGameLogic\BeastyBarGameLogic.csproj", "{F74FF424-9C20-4CC4-8623-B33ED3860EAA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{16F3BE9D-73A7-46E0-A2EE-FF9B885F0000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeastyBarGameLogic", "BeastyBarGameLogic\BeastyBarGameLogic.csproj", "{B78897D7-5790-495D-A8D8-FE6154E1DC89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{7A70FB3F-8004-409A-B92D-F9131E43F3F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A70FB3F-8004-409A-B92D-F9131E43F3F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A70FB3F-8004-409A-B92D-F9131E43F3F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F74FF424-9C20-4CC4-8623-B33ED3860EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F74FF424-9C20-4CC4-8623-B33ED3860EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F74FF424-9C20-4CC4-8623-B33ED3860EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F74FF424-9C20-4CC4-8623-B33ED3860EAA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16F3BE9D-73A7-46E0-A2EE-FF9B885F0000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16F3BE9D-73A7-46E0-A2EE-FF9B885F0000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16F3BE9D-73A7-46E0-A2EE-FF9B885F0000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16F3BE9D-73A7-46E0-A2EE-FF9B885F0000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78897D7-5790-495D-A8D8-FE6154E1DC89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78897D7-5790-495D-A8D8-FE6154E1DC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78897D7-5790-495D-A8D8-FE6154E1DC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78897D7-5790-495D-A8D8-FE6154E1DC89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

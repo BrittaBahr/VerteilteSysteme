@@ -511,22 +511,10 @@ namespace Client
         public PlayerVM SelectedPlayer { get; set; }
 
         /// <summary>
-        /// Gets the game representation.
-        /// </summary>
-        /// <value>
-        /// The game representation.
-        /// </value>
-        public TicTacToeGameRepresentation GameRepresentation { get; } = new TicTacToeGameRepresentation();
-
-        /// <summary>
         /// Resets the game field.
         /// </summary>
         private void ResetField()
         {
-            foreach (var item in this.GameRepresentation.GameCells)
-            {
-                item.PlayerMark = 0;
-            }
         }
 
         /// <summary>
@@ -642,17 +630,10 @@ namespace Client
 
             if (status.CurrentPlayerMarker == 1)
             {
-                if (status.UpdatedPosition >= 0)
-                {
-                    this.GameRepresentation.GameCells[status.UpdatedPosition].PlayerMark = 2;
-                }
             }
             else
             {
-                if (status.UpdatedPosition >= 0)
-                {
-                    this.GameRepresentation.GameCells[status.UpdatedPosition].PlayerMark = 1;
-                }
+
             }
 
             if (status.IndexedGame.All<int>(x => x == 0))
