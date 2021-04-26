@@ -6,6 +6,7 @@ namespace Client.ViewModels
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using BeastyBarGameLogic.NetworkMessaging;
+    using Client.Models;
 
     /// <summary>
     /// Represents a view model for a player.
@@ -17,10 +18,10 @@ namespace Client.ViewModels
         /// Initializes a new instance of the <see cref="PlayerVM"/> class.
         /// </summary>
         /// <param name="player">The player.</param>
-        //public PlayerVM(Player player)
-        //{
-        //    this.Player = player;
-        //}
+        public PlayerVM(BeastyBarPlayer player)
+        {
+            this.Player = player;
+        }
 
         /// <summary>
         /// Gets or sets the name of the player.
@@ -37,7 +38,6 @@ namespace Client.ViewModels
 
             set
             {
-                //this.Player.PlayerName = value;
                 this.FireOnPropertyChanged();
             }
         }
@@ -55,46 +55,6 @@ namespace Client.ViewModels
         /// <value>
         /// The player.
         /// </value>
-        //public Player Player { get; set; }
-
-        /// <summary>
-        /// Gets or sets the wins.
-        /// </summary>
-        /// <value>
-        /// The wins of the player.
-        /// </value>
-        //public int Wins
-        //{
-        //    //get
-        //    //{
-        //    //    //return this.Player.Wins;
-        //    //}
-
-        //    //set
-        //    //{
-        //    //    this.Player.Wins = value;
-        //    //    this.FireOnPropertyChanged();
-        //    //}
-        //}
-
-        /// <summary>
-        /// Gets or sets the marked positions.
-        /// </summary>
-        /// <value>
-        /// The marked positions.
-        /// </value>
-        /// <exception cref="ArgumentNullException">MarkedPositions - The list of marked positions can´t be null.</exception>
-        //public List<int> MarkedPositions
-        //{
-        //    get
-        //    {
-        //        return this.Player.MarkedPositions;
-        //    }
-
-        //    set
-        //    {
-        //        this.Player.MarkedPositions = value ?? throw new ArgumentNullException(nameof(this.MarkedPositions), "The list of marked positions can´t be null.");
-        //    }
-        //}
+        public BeastyBarPlayer Player { get; set; }
     }
 }

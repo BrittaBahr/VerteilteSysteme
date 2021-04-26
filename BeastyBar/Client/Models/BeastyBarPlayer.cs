@@ -173,7 +173,6 @@
 
         public async void PlayCard(Animal handcardAnimal)
         {
-
             if (!this.handcards.Contains(handcardAnimal))
             {
                 throw new NotValidCardException();

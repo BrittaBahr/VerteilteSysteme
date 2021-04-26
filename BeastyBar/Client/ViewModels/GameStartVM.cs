@@ -503,10 +503,10 @@ namespace Client
         /// Called when the client player instance is returned in order to obtain the clients connection id.
         /// </summary>
         /// <param name="player">The client player.</param>
-        //private void OnClientPlayerInstanceReturned(Player player)
-        //{
-        //    this.ClientPlayer.Player = player;
-        //}
+        private void OnClientPlayerInstanceReturned(BeastyBarPlayer player)
+        {
+            this.ClientPlayer.PlayerName = player.Name;
+        }
 
         /// <summary>
         /// Called when the client receives a list of currently running games.
