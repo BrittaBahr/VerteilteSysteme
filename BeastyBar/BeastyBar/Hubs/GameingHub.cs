@@ -11,9 +11,10 @@ namespace BeastyBar.Hubs
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
     using BeastyBar.Services;
+    using Client.Models;
 
     /// <summary>
-    /// The SignalR Hub for the Tic-Tac-Toe server.
+    /// The SignalR Hub for the Beasty Bar server.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.SignalR.Hub" />
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -40,12 +41,12 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task GetPlayers(string requestedPlayerName)
         {
-            // var allPlayers = await this.mainService.GetPlayersAsync();
+            var allPlayers = await this.mainService.GetPlayersAsync();
 
-            // select all players except the requested one
-            // requested player should not be included in the result
-            // allPlayers = allPlayers.Where(name => name.PlayerName != requestedPlayerName);
-            //await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
+           // select all players except the requested one
+            //requested player should not be included in the result
+             allPlayers = allPlayers.Where(pl => pl.Name != requestedPlayerName);
+            await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
         }
 
         /// <summary>
@@ -55,14 +56,14 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task AddPlayer(string nameForNewPlayer, int clientId)
         {
-            // Player newPlayer = new Player(nameForNewPlayer) { ConnectionId = Context.ConnectionId, ClientId = clientId };
-            //var allPlayers = await this.mainService.GetPlayersAsync();
+            BeastyBarPlayer newPlayer = new BeastyBarPlayer(clientId, nameForNewPlayer,new Random());
+            var allPlayers = await this.mainService.GetPlayersAsync();
 
-            //await this.mainService.AddPlayerAsync(newPlayer);
-            //await Clients.Caller.SendAsync("ReturnPlayerInstance", newPlayer);
+            await this.mainService.AddPlayerAsync(newPlayer);
+            await Clients.Caller.SendAsync("ReturnPlayerInstance", newPlayer);
 
-            //await Clients.Caller.SendAsync("ReceiveGames", await this.mainService.GetSimpleGameInformationListAsync());
-            //await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
+            await Clients.Caller.SendAsync("ReceiveGames", await this.mainService.GetSimpleGameInformationListAsync());
+            await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace BeastyBar.Hubs
             //    var allRequests = await this.mainService.GetGameRequestsAsync();
 
             //    var existingRequest = allRequests.SingleOrDefault(request =>
-            //    (request.Enemy.ConnectionId == gameRequest.Enemy.ConnectionId || request.Enemy.ConnectionId == gameRequest.RequestingPlayer.ConnectionId) && 
+            //    (request.Enemy.ConnectionId == gameRequest.Enemy.ConnectionId || request.Enemy.ConnectionId == gameRequest.RequestingPlayer.ConnectionId) &&
             //    (request.RequestingPlayer.ConnectionId == gameRequest.Enemy.ConnectionId || request.RequestingPlayer.ConnectionId == gameRequest.RequestingPlayer.ConnectionId));
 
             //    if (existingRequest == null)
@@ -238,28 +239,6 @@ namespace BeastyBar.Hubs
             //private async Task UpdatePlayerSpecificGameCard(MessageData data)
             //{
             //   await Clients.Client(data.CurrentPlayerId).SendAsync("GameStatus", data);
-            //}
-
-            /// <summary>
-            /// Creates a new game status.
-            /// </summary>
-            /// <param name="game">The game instance.</param>
-            /// <param name="isNewGame">If set to <c>true</c> [is new game].</param>
-            /// <param name="updatedPosition">The updated position in the field.</param>
-            /// <returns>The new game status.</returns>
-            //private MessageData CreateNewGameStatus(Game game, bool isNewGame, int updatedPosition = -1)
-            //{
-            //    var gameStatus = new MessageData(game.CurrentGameStatus, game.CurrentPlayer.ConnectionId, game.CurrentPlayer.Marker, game.GameId, game.PlayerOne.Wins, game.PlayerTwo.Wins)
-            //    {
-            //        UpdatedPosition = updatedPosition
-            //    };
-
-            //    if (isNewGame)
-            //    {
-            //        gameStatus.IsNewGame = true;
-            //    }
-
-            //    return gameStatus;
             //}
         }
     }

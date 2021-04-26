@@ -39,7 +39,7 @@
 
         private ClientHandler networkClient;
 
-        public BeastyBarPlayer(int playerId, string name, IBeastyBarPlayerNetworkCommunicator communicator, Random rand)
+        public BeastyBarPlayer(int playerId, string name, Random rand)
         {
             if (string.IsNullOrEmpty(name) | string.IsNullOrWhiteSpace(name))
             {
