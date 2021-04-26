@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pbRs69lNoEqy8g9yuIjDPssBJNUxLQcYyoMIRyH8hr/Cx/o/bbhj++QtQPeGfR1SEqI7L5+ho1aiXDw9bCIFFg==",
+  "dgSpecHash": "pEiMor9qVFnbbej8bsh+BDJREQ37wOWzMGadT8cBtmq5lJ1oNCCiErN4+vx6H1e4CBHbIaiR/iJEbrvQMb1CIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\Client\\Client.csproj",
   "expectedPackageFiles": [
@@ -41,7 +41,7 @@
     "C:\\Users\\britt\\.nuget\\packages\\microsoft.netcore.platforms\\3.0.0\\microsoft.netcore.platforms.3.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\britt\\.nuget\\packages\\microsoft.win32.registry\\4.6.0\\microsoft.win32.registry.4.6.0.nupkg.sha512",
-    "C:\\Users\\britt\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\britt\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\britt\\.nuget\\packages\\serilog\\2.8.0\\serilog.2.8.0.nupkg.sha512",
     "C:\\Users\\britt\\.nuget\\packages\\serilog.extensions.logging\\3.0.1\\serilog.extensions.logging.3.0.1.nupkg.sha512",

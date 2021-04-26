@@ -42,6 +42,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -91,9 +97,6 @@
             "projectReferences": {
               "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj": {
                 "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj"
-              },
-              "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-                "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
               }
             }
           }
@@ -118,10 +121,6 @@
             "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[3.0.0, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[12.0.3, )"
             },
             "Serilog.Extensions.Logging": {
               "target": "Package",
@@ -160,17 +159,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
-      }
-    },
-    "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj",
-        "projectName": "GameLibrary",
-        "projectPath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\GameLibrary\\GameLibrary.csproj"
-      },
-      "frameworks": {
-        "net472": {}
       }
     }
   }

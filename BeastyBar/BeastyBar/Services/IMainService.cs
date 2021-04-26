@@ -4,7 +4,7 @@ namespace BeastyBar.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using GameLibrary;
+    using BeastyBarGameLogic.NetworkMessaging;
 
     /// <summary>
     /// Represents an interface for the main service.
@@ -44,25 +44,25 @@ namespace BeastyBar.Services
         /// <returns>The game which has been removed.</returns>
         Task<Game> RemoveGameAsync(Game game);
 
-        /// <summary>
-        /// Gets the players asynchronously.
-        /// </summary>
-        /// <returns>The collection of all players.</returns>
-        Task<IEnumerable<Player>> GetPlayersAsync();
+        ///// <summary>
+        ///// Gets the players asynchronously.
+        ///// </summary>
+        ///// <returns>The collection of all players.</returns>
+        //Task<IEnumerable<Player>> GetPlayersAsync();
 
-        /// <summary>
-        /// Adds the player asynchronously.
-        /// </summary>
-        /// <param name="player">The player to be added.</param>
-        /// <returns>The player which has been added.</returns>
-        Task<Player> AddPlayerAsync(Player player);
+        ///// <summary>
+        ///// Adds the player asynchronously.
+        ///// </summary>
+        ///// <param name="player">The player to be added.</param>
+        ///// <returns>The player which has been added.</returns>
+        //Task<Player> AddPlayerAsync(Player player);
 
-        /// <summary>
-        /// Removes the player asynchronously.
-        /// </summary>
-        /// <param name="player">The player to be removed.</param>
-        /// <returns>The player which has been removed.</returns>
-        Task<Player> RemovePlayerAsync(Player player);
+        ///// <summary>
+        ///// Removes the player asynchronously.
+        ///// </summary>
+        ///// <param name="player">The player to be removed.</param>
+        ///// <returns>The player which has been removed.</returns>
+        //Task<Player> RemovePlayerAsync(Player player);
 
         /// <summary>
         /// Removes the request asynchronously.
@@ -76,7 +76,7 @@ namespace BeastyBar.Services
         /// Gets the players not in game asynchronously.
         /// </summary>
         /// <returns>The collection of players who are not in a game.</returns>
-        Task<IEnumerable<Player>> GetPlayersNotInGameAsync();
+        //Task<IEnumerable<Player>> GetPlayersNotInGameAsync();
 
         /// <summary>
         /// Gets the simple game information list asynchronously.

@@ -18,7 +18,7 @@ namespace Client.Models
     using Client.Services;
     using Client.ViewModels;
     using Client;
-    using GameLibrary;
+    using BeastyBarGameLogic.NetworkMessaging;
     using Microsoft.AspNetCore.SignalR.Client;
     using Microsoft.Extensions.Logging;
 
@@ -213,21 +213,21 @@ namespace Client.Models
         {
             //this.logger.LogInformation("[OnGameStatusReceived] GameId: {0}", new object[] { status.GameId });
             
-            if (this.CurrentGameStatus == null || status.IsNewGame)
-            {
-               /* if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
-                {
-                   // this.PlayerTwo = this.RequestingOrEnemyPlayer;
-                    //this.PlayerOne = this.ClientPlayer;
-                }
-                else
-                {
-                    //this.PlayerOne = this.RequestingOrEnemyPlayer;
-                   // this.PlayerTwo = this.ClientPlayer;
-                }
+            //if (this.CurrentGameStatus == null || status.IsNewGame)
+            //{
+            //   /* if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
+            //    {
+            //       // this.PlayerTwo = this.RequestingOrEnemyPlayer;
+            //        //this.PlayerOne = this.ClientPlayer;
+            //    }
+            //    else
+            //    {
+            //        //this.PlayerOne = this.RequestingOrEnemyPlayer;
+            //       // this.PlayerTwo = this.ClientPlayer;
+            //    }
 
-                //this.GameIsActive = true;*/
-            }
+            //    //this.GameIsActive = true;*/
+            //}
 
             /*if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
             {
@@ -248,12 +248,12 @@ namespace Client.Models
             //    this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
             //}
 
-            if (status.CurrentPlayerMarker == 1)
-            {
-            }
-            else
-            {
-            }
+            //if (status.CurrentPlayerMarker == 1)
+            //{
+            //}
+            //else
+            //{
+            //}
 
             //if (status.IndexedGame.All<int>(x => x == 0))
             //{
@@ -315,33 +315,33 @@ namespace Client.Models
 
                 //if (this.GameIsActive)
                 //{
-                    if (this.CurrentGameStatus.IndexedGame[cell.Index] == 0) // && this.CurrentGameStatus.CurrentPlayerId == this.ClientPlayer.Player.ConnectionId && this.myTurn)
-                    {
-                        cell.PlayerMark = this.CurrentGameStatus.CurrentPlayerMarker;
-                        this.myTurn = false;
+                    //if (this.CurrentGameStatus.IndexedGame[cell.Index] == 0) // && this.CurrentGameStatus.CurrentPlayerId == this.ClientPlayer.Player.ConnectionId && this.myTurn)
+                    //{
+                    //    cell.PlayerMark = this.CurrentGameStatus.CurrentPlayerMarker;
+                    //    this.myTurn = false;
 
-                        var status = new MessageData
-                        {
-                           // CurrentPlayerId = this.ClientPlayer.Player.ConnectionId,
-                            UpdatedPosition = cell.Index,
-                            GameId = this.CurrentGameStatus.GameId
-                        };
+                    //    var status = new MessageData
+                    //    {
+                    //       // CurrentPlayerId = this.ClientPlayer.Player.ConnectionId,
+                    //        UpdatedPosition = cell.Index,
+                    //        GameId = this.CurrentGameStatus.GameId
+                    //    };
 
-                       // this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
+                    //   // this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
 
-                        try
-                        {
-                            await this.hubConnection.SendAsync("UpdateGameStatus", status);
-                        }
-                        catch (HttpRequestException)
-                        {
-                            this.StatusMessage = "Unable to reach server. Please try again later.";
-                        }
-                        catch (Exception)
-                        {
-                            this.StatusMessage = "An unknown error occured. Please try again later.";
-                        }
-                    }
+                    //    try
+                    //    {
+                    //        await this.hubConnection.SendAsync("UpdateGameStatus", status);
+                    //    }
+                    //    catch (HttpRequestException)
+                    //    {
+                    //        this.StatusMessage = "Unable to reach server. Please try again later.";
+                    //    }
+                    //    catch (Exception)
+                    //    {
+                    //        this.StatusMessage = "An unknown error occured. Please try again later.";
+                    //    }
+                    //}
                 //}                  
         }
     }

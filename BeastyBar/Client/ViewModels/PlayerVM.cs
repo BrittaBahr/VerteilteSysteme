@@ -5,7 +5,7 @@ namespace Client.ViewModels
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using GameLibrary;
+    using BeastyBarGameLogic.NetworkMessaging;
 
     /// <summary>
     /// Represents a view model for a player.

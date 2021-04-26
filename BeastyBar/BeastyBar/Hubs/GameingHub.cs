@@ -6,8 +6,8 @@ namespace BeastyBar.Hubs
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using GameLibrary;
-    using Microsoft.AspNetCore.Authentication. JwtBearer;
+    using BeastyBarGameLogic.NetworkMessaging;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
     using BeastyBar.Services;
@@ -40,12 +40,12 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task GetPlayers(string requestedPlayerName)
         {
-            var allPlayers = await this.mainService.GetPlayersAsync();
+            // var allPlayers = await this.mainService.GetPlayersAsync();
 
             // select all players except the requested one
             // requested player should not be included in the result
-            allPlayers = allPlayers.Where(name => name.PlayerName != requestedPlayerName);
-            await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
+            // allPlayers = allPlayers.Where(name => name.PlayerName != requestedPlayerName);
+            //await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
         }
 
         /// <summary>
@@ -55,14 +55,14 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task AddPlayer(string nameForNewPlayer, int clientId)
         {
-            Player newPlayer = new Player(nameForNewPlayer) { ConnectionId = Context.ConnectionId, ClientId = clientId };
-            var allPlayers = await this.mainService.GetPlayersAsync();
+            // Player newPlayer = new Player(nameForNewPlayer) { ConnectionId = Context.ConnectionId, ClientId = clientId };
+            //var allPlayers = await this.mainService.GetPlayersAsync();
 
-            await this.mainService.AddPlayerAsync(newPlayer);
-            await Clients.Caller.SendAsync("ReturnPlayerInstance", newPlayer);
+            //await this.mainService.AddPlayerAsync(newPlayer);
+            //await Clients.Caller.SendAsync("ReturnPlayerInstance", newPlayer);
 
-            await Clients.Caller.SendAsync("ReceiveGames", await this.mainService.GetSimpleGameInformationListAsync());
-            await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
+            //await Clients.Caller.SendAsync("ReceiveGames", await this.mainService.GetSimpleGameInformationListAsync());
+            //await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
         }
 
         /// <summary>
@@ -72,46 +72,46 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task AddGameRequest(GameRequest gameRequest)
         {
-            var list = await this.mainService.GetPlayersAsync();
-            var player = list.SingleOrDefault(player => player.ConnectionId == gameRequest.Enemy.ConnectionId);
+            //var list = await this.mainService.GetPlayersAsync();
+            //var player = list.SingleOrDefault(player => player.ConnectionId == gameRequest.Enemy.ConnectionId);
 
-            if (player != null)
-            {
-                // wenn der Enemy schon ein request von wem anderen hat, schicken wir Statusnachricht an den Caller
-                var allRequests = await this.mainService.GetGameRequestsAsync();
+            //if (player != null)
+            //{
+            //    // wenn der Enemy schon ein request von wem anderen hat, schicken wir Statusnachricht an den Caller
+            //    var allRequests = await this.mainService.GetGameRequestsAsync();
 
-                var existingRequest = allRequests.SingleOrDefault(request =>
-                (request.Enemy.ConnectionId == gameRequest.Enemy.ConnectionId || request.Enemy.ConnectionId == gameRequest.RequestingPlayer.ConnectionId) && 
-                (request.RequestingPlayer.ConnectionId == gameRequest.Enemy.ConnectionId || request.RequestingPlayer.ConnectionId == gameRequest.RequestingPlayer.ConnectionId));
+            //    var existingRequest = allRequests.SingleOrDefault(request =>
+            //    (request.Enemy.ConnectionId == gameRequest.Enemy.ConnectionId || request.Enemy.ConnectionId == gameRequest.RequestingPlayer.ConnectionId) && 
+            //    (request.RequestingPlayer.ConnectionId == gameRequest.Enemy.ConnectionId || request.RequestingPlayer.ConnectionId == gameRequest.RequestingPlayer.ConnectionId));
 
-                if (existingRequest == null)
-                {
-                    var request = await this.mainService.AddGameRequestAsync(gameRequest);
+            //    if (existingRequest == null)
+            //    {
+            //        var request = await this.mainService.AddGameRequestAsync(gameRequest);
 
-                    var task = Task.Run(() =>
-                    {
-                        var aTimer = new System.Timers.Timer(9000) { AutoReset = false };
+            //        var task = Task.Run(() =>
+            //        {
+            //            var aTimer = new System.Timers.Timer(9000) { AutoReset = false };
 
-                        aTimer.Start();
+            //            aTimer.Start();
 
-                        aTimer.Elapsed += async (sender, e) =>
-                        {
-                            aTimer.Stop();
+            //            aTimer.Elapsed += async (sender, e) =>
+            //            {
+            //                aTimer.Stop();
 
-                            if (!request.Accepted)
-                            {
-                                await this.mainService.RemoveRequestAsync(request, false);
-                            }
-                        };
-                    });
+            //                if (!request.Accepted)
+            //                {
+            //                    await this.mainService.RemoveRequestAsync(request, false);
+            //                }
+            //            };
+            //        });
 
-                    await Clients.Client(player.ConnectionId).SendAsync("GameRequested", gameRequest);
-                }
-                else
-                {
-                    await Clients.Caller.SendAsync("StatusMessage", "A request already exists.");
-                }
-            }
+            //        await Clients.Client(player.ConnectionId).SendAsync("GameRequested", gameRequest);
+            //    }
+            //    else
+            //    {
+            //        await Clients.Caller.SendAsync("StatusMessage", "A request already exists.");
+            //    }
+            //}
         }
 
         /// <summary>
@@ -122,35 +122,35 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task DeclineOrAcceptRequest(int id, bool accept)
         {
-            var requests = new List<GameRequest>(await this.mainService.GetGameRequestsAsync());
-            var existingRequest = requests.SingleOrDefault(request => request.RequestID == id);
+            //var requests = new List<GameRequest>(await this.mainService.GetGameRequestsAsync());
+            //var existingRequest = requests.SingleOrDefault(request => request.RequestID == id);
 
-            if (existingRequest != null)
-            {
-                if (!accept)
-                {
-                    // existingRequest.Declined = true;
-                    await Clients.Client(existingRequest.RequestingPlayer.ConnectionId).SendAsync("StatusMessage", $"{existingRequest.Enemy.PlayerName} has declined the request.");
-                    await this.mainService.RemoveRequestAsync(existingRequest, false);
-                }
-                else
-                {
-                    var game = new Game(existingRequest.RequestingPlayer, existingRequest.Enemy);
+            //if (existingRequest != null)
+            //{
+            //    if (!accept)
+            //    {
+            //        // existingRequest.Declined = true;
+            //        await Clients.Client(existingRequest.RequestingPlayer.ConnectionId).SendAsync("StatusMessage", $"{existingRequest.Enemy.PlayerName} has declined the request.");
+            //        await this.mainService.RemoveRequestAsync(existingRequest, false);
+            //    }
+            //    else
+            //    {
+            //        var game = new Game(existingRequest.RequestingPlayer, existingRequest.Enemy);
 
-                    await this.mainService.RemoveRequestAsync(existingRequest, true);
+            //        await this.mainService.RemoveRequestAsync(existingRequest, true);
 
-                    await this.mainService.AddGameAsync(game);
+            //        await this.mainService.AddGameAsync(game);
 
-                    await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
+            //        await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
 
-                    var simpleGameInfo = await this.mainService.GetSimpleGameInformationListAsync();
-                    await Clients.All.SendAsync("ReceiveGames", simpleGameInfo);
+            //        var simpleGameInfo = await this.mainService.GetSimpleGameInformationListAsync();
+            //        await Clients.All.SendAsync("ReceiveGames", simpleGameInfo);
 
-                    var gameStatus = this.CreateNewGameStatus(game, true);
+            //        var gameStatus = this.CreateNewGameStatus(game, true);
 
-                    await Clients.Clients(existingRequest.RequestingPlayer.ConnectionId, existingRequest.Enemy.ConnectionId).SendAsync("GameStatus", gameStatus);
-                }
-            }
+            //        await Clients.Clients(existingRequest.RequestingPlayer.ConnectionId, existingRequest.Enemy.ConnectionId).SendAsync("GameStatus", gameStatus);
+            //    }
+            //}
         }
 
         /// <summary>
@@ -160,20 +160,20 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task UpdateGameStatus(MessageData update)
         {
-            var games = new List<Game>(await this.mainService.GetGamesAsync());
-            var game = games.SingleOrDefault(g => g.GameId == update.GameId);
+            //var games = new List<Game>(await this.mainService.GetGamesAsync());
+            //var game = games.SingleOrDefault(g => g.GameId == update.GameId);
 
-            if (game != null)
-            {
-                if (game.PlayerOne.ConnectionId == update.CurrentPlayerId)
-                {
-                    await this.UpdatePlayerSpecificGameStatus(game, update.UpdatedPosition, game.PlayerOne);
-                }
-                else if (game.PlayerTwo.ConnectionId == update.CurrentPlayerId)
-                {
-                    await this.UpdatePlayerSpecificGameStatus(game, update.UpdatedPosition, game.PlayerTwo);
-                }
-            }
+            //if (game != null)
+            //{
+            //    if (game.PlayerOne.ConnectionId == update.CurrentPlayerId)
+            //    {
+            //        await this.UpdatePlayerSpecificGameStatus(game, update.UpdatedPosition, game.PlayerOne);
+            //    }
+            //    else if (game.PlayerTwo.ConnectionId == update.CurrentPlayerId)
+            //    {
+            //        await this.UpdatePlayerSpecificGameStatus(game, update.UpdatedPosition, game.PlayerTwo);
+            //    }
+            //}
         }
 
         /// <summary>
@@ -184,19 +184,19 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async Task ReturnToLobby(string id, string enemyId)
         {
-            var games = new List<Game>(await this.mainService.GetGamesAsync());
+            //var games = new List<Game>(await this.mainService.GetGamesAsync());
 
-            foreach (var game in games)
-            {
-                if (game.PlayerOne.ConnectionId == id || game.PlayerTwo.ConnectionId == id)
-                {
-                    await this.mainService.RemoveGameAsync(game);
-                    await Clients.Client(enemyId).SendAsync("EnemyLeftGame");
-                    var simpleGameInfo = await this.mainService.GetSimpleGameInformationListAsync();
-                    await Clients.All.SendAsync("ReceiveGames", simpleGameInfo);
-                    await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
-                }
-            }
+            //foreach (var game in games)
+            //{
+            //    if (game.PlayerOne.ConnectionId == id || game.PlayerTwo.ConnectionId == id)
+            //    {
+            //        await this.mainService.RemoveGameAsync(game);
+            //        await Clients.Client(enemyId).SendAsync("EnemyLeftGame");
+            //        var simpleGameInfo = await this.mainService.GetSimpleGameInformationListAsync();
+            //        await Clients.All.SendAsync("ReceiveGames", simpleGameInfo);
+            //        await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
+            //    }
+            //}
         }
 
         /// <summary>
@@ -217,99 +217,100 @@ namespace BeastyBar.Hubs
         /// <returns>A Task that represents the asynchronous method.</returns>
         public async override Task OnDisconnectedAsync(Exception exception)
         {
-            var id = Context.ConnectionId;
-            var allPlayers = await this.mainService.GetPlayersAsync();
-            var disconnectedPlayer = allPlayers.FirstOrDefault(player => player.ConnectionId == id);
+            //    var id = Context.ConnectionId;
+            //    var allPlayers = await this.mainService.GetPlayersAsync();
+            //    var disconnectedPlayer = allPlayers.FirstOrDefault(player => player.ConnectionId == id);
 
-            var games = new List<Game>(await this.mainService.GetGamesAsync());
+            //    var games = new List<Game>(await this.mainService.GetGamesAsync());
 
-            foreach (var game in games)
-            {
-                if (game.PlayerOne.ConnectionId == id || game.PlayerTwo.ConnectionId == id)
-                {
-                    Player enemyPlayer;
+            //    foreach (var game in games)
+            //    {
+            //        if (game.PlayerOne.ConnectionId == id || game.PlayerTwo.ConnectionId == id)
+            //        {
+            //            Player enemyPlayer;
 
-                    if (game.PlayerOne.ConnectionId == id)
-                    {
-                        enemyPlayer = game.PlayerOne;
-                    }
-                    else
-                    {
-                        enemyPlayer = game.PlayerTwo;
-                    }
+            //            if (game.PlayerOne.ConnectionId == id)
+            //            {
+            //                enemyPlayer = game.PlayerOne;
+            //            }
+            //            else
+            //            {
+            //                enemyPlayer = game.PlayerTwo;
+            //            }
 
-                    await this.ReturnToLobby(Context.ConnectionId, enemyPlayer.ConnectionId);
-                    await this.mainService.RemoveGameAsync(game);
-                }
-            }
+            //            await this.ReturnToLobby(Context.ConnectionId, enemyPlayer.ConnectionId);
+            //            await this.mainService.RemoveGameAsync(game);
+            //        }
+            //    }
 
-            await this.mainService.RemovePlayerAsync(disconnectedPlayer);
-            await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
-        }
+            //    await this.mainService.RemovePlayerAsync(disconnectedPlayer);
+            //    await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
+            //}
 
-        /// <summary>
-        /// Updates the game after a move and sends the game status to concerned clients.
-        /// </summary>
-        /// <param name="game">The game instance.</param>
-        /// <param name="updatedPosition">The updated position.</param>
-        /// <param name="player">The player instance.</param>
-        /// <returns>A Task that represents the asynchronous method.</returns>
-        private async Task UpdatePlayerSpecificGameStatus(Game game, int updatedPosition, Player player)
-        {
-            if (game.GameOver)
-            {
-                return;
-            }
+            /// <summary>
+            /// Updates the game after a move and sends the game status to concerned clients.
+            /// </summary>
+            /// <param name="game">The game instance.</param>
+            /// <param name="updatedPosition">The updated position.</param>
+            /// <param name="player">The player instance.</param>
+            /// <returns>A Task that represents the asynchronous method.</returns>
+            //private async Task UpdatePlayerSpecificGameStatus(Game game, int updatedPosition, Player player)
+            //{
+            //    if (game.GameOver)
+            //    {
+            //        return;
+            //    }
 
-            if (game.IsMoveValid(updatedPosition, player))
-            {
-                var gameFinished = game.MakeMove(updatedPosition, player);
+            //    if (game.IsMoveValid(updatedPosition, player))
+            //    {
+            //        var gameFinished = game.MakeMove(updatedPosition, player);
 
-                if (gameFinished)
-                {
-                    // db call
-                    await Clients.Clients(game.PlayerOne.ConnectionId, game.PlayerTwo.ConnectionId).SendAsync("StatusMessage", game.EndMessage + " New game in 5 seconds");
-                    var oldGameStatus = this.CreateNewGameStatus(game, false, updatedPosition);
-                    game.GameOver = true;
+            //        if (gameFinished)
+            //        {
+            //            // db call
+            //            await Clients.Clients(game.PlayerOne.ConnectionId, game.PlayerTwo.ConnectionId).SendAsync("StatusMessage", game.EndMessage + " New game in 5 seconds");
+            //            var oldGameStatus = this.CreateNewGameStatus(game, false, updatedPosition);
+            //            game.GameOver = true;
 
-                    await Clients.Client(game.CurrentPlayer.ConnectionId).SendAsync("GameStatus", oldGameStatus);
-                    await Task.Delay(5000);
+            //            await Clients.Client(game.CurrentPlayer.ConnectionId).SendAsync("GameStatus", oldGameStatus);
+            //            await Task.Delay(5000);
 
-                    game.NewGameSetup();
-                    var gameStatus = this.CreateNewGameStatus(game, true, updatedPosition);
+            //            game.NewGameSetup();
+            //            var gameStatus = this.CreateNewGameStatus(game, true, updatedPosition);
 
-                    game.GameOver = false;
-                    await Clients.Clients(game.PlayerOne.ConnectionId, game.PlayerTwo.ConnectionId).SendAsync("GameStatus", gameStatus);
-                }
-                else
-                {
-                    var gameStatus = this.CreateNewGameStatus(game, false, updatedPosition);
+            //            game.GameOver = false;
+            //            await Clients.Clients(game.PlayerOne.ConnectionId, game.PlayerTwo.ConnectionId).SendAsync("GameStatus", gameStatus);
+            //        }
+            //        else
+            //        {
+            //            var gameStatus = this.CreateNewGameStatus(game, false, updatedPosition);
 
-                    await Clients.Client(game.CurrentPlayer.ConnectionId).SendAsync("GameStatus", gameStatus);
-                }
-            }
-        }
+            //            await Clients.Client(game.CurrentPlayer.ConnectionId).SendAsync("GameStatus", gameStatus);
+            //        }
+            //    }
+            //}
 
-        /// <summary>
-        /// Creates a new game status.
-        /// </summary>
-        /// <param name="game">The game instance.</param>
-        /// <param name="isNewGame">If set to <c>true</c> [is new game].</param>
-        /// <param name="updatedPosition">The updated position in the field.</param>
-        /// <returns>The new game status.</returns>
-        private MessageData CreateNewGameStatus(Game game, bool isNewGame, int updatedPosition = -1)
-        {
-            var gameStatus = new MessageData(game.CurrentGameStatus, game.CurrentPlayer.ConnectionId, game.CurrentPlayer.Marker, game.GameId, game.PlayerOne.Wins, game.PlayerTwo.Wins)
-            {
-                UpdatedPosition = updatedPosition
-            };
+            /// <summary>
+            /// Creates a new game status.
+            /// </summary>
+            /// <param name="game">The game instance.</param>
+            /// <param name="isNewGame">If set to <c>true</c> [is new game].</param>
+            /// <param name="updatedPosition">The updated position in the field.</param>
+            /// <returns>The new game status.</returns>
+            //private MessageData CreateNewGameStatus(Game game, bool isNewGame, int updatedPosition = -1)
+            //{
+            //    var gameStatus = new MessageData(game.CurrentGameStatus, game.CurrentPlayer.ConnectionId, game.CurrentPlayer.Marker, game.GameId, game.PlayerOne.Wins, game.PlayerTwo.Wins)
+            //    {
+            //        UpdatedPosition = updatedPosition
+            //    };
 
-            if (isNewGame)
-            {
-                gameStatus.IsNewGame = true;
-            }
+            //    if (isNewGame)
+            //    {
+            //        gameStatus.IsNewGame = true;
+            //    }
 
-            return gameStatus;
+            //    return gameStatus;
+            //}
         }
     }
 }

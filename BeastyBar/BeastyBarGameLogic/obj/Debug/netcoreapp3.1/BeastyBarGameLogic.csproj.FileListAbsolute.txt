@@ -1,12 +1,3 @@
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\BeastyBarGameLogic.deps.json
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\BeastyBarGameLogic.dll
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\BeastyBarGameLogic.pdb
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.csprojAssemblyReference.cache
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.csproj.CoreCompileInputs.cache
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.AssemblyInfoInputs.cache
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.AssemblyInfo.cs
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.dll
-C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.pdb
 C:\Users\SvenjaBahr\Desktop\DAta\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.csprojAssemblyReference.cache
 C:\Users\SvenjaBahr\Desktop\DAta\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.AssemblyInfoInputs.cache
 C:\Users\SvenjaBahr\Desktop\DAta\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.AssemblyInfo.cs
@@ -21,3 +12,11 @@ C:\Users\SvenjaBahr\Desktop\DAta\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\b
 C:\Users\SvenjaBahr\Desktop\DAta\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\GameLibrary.pdb
 C:\Users\SvenjaBahr\Desktop\DAta\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\Newtonsoft.Json.xml
 C:\Users\SvenjaBahr\Desktop\DAta\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.csproj.CopyComplete
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\BeastyBarGameLogic.deps.json
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\BeastyBarGameLogic.dll
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\bin\Debug\netcoreapp3.1\BeastyBarGameLogic.pdb
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.csproj.CoreCompileInputs.cache
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.AssemblyInfoInputs.cache
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.AssemblyInfo.cs
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.dll
+C:\Users\britt\Desktop\VerteilteSysteme\BeastyBar\BeastyBarGameLogic\obj\Debug\netcoreapp3.1\BeastyBarGameLogic.pdb
