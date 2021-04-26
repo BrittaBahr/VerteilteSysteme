@@ -10,7 +10,6 @@ namespace BeastyBarGameLogic.NetworkMessaging
 {
     using System;
     using Newtonsoft.Json;
-    using 
 
     /// <summary>
     /// This class represents a game request in a game. 
@@ -37,9 +36,9 @@ namespace BeastyBarGameLogic.NetworkMessaging
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRequest"/> class.
         /// </summary>
-        public GameRequest()
-        {
-        }
+        //public GameRequest()
+        //{
+        //}
 
         /// <summary>
         /// Gets or sets a value indicating whether a game request has been accepted.
