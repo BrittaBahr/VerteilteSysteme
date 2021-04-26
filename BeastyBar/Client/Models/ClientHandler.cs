@@ -10,6 +10,7 @@ namespace Client.Models
     using System.Media;
     using System.Net.Http;
     using System.Runtime.CompilerServices;
+    using System.Runtime;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
@@ -72,6 +73,13 @@ namespace Client.Models
         /// This field is used to save the timer.
         /// </summary>
         private System.Timers.Timer timer;
+
+        public event EventHandler<GameCardReceivedEventArgs> GameCardReceived;
+
+        protected void FireGameCardReceived(MessageData data)
+        {
+            this.GameCardReceived?.Invoke(this, new GameCardReceivedEventArgs(data));
+        }
 
         private bool activeStatus;
 
@@ -171,6 +179,8 @@ namespace Client.Models
             }
         }
 
+        public bool GameIsActive { get; private set; }
+
         /// <summary>
         /// Closes the connection asynchronously.
         /// </summary>
@@ -191,7 +201,7 @@ namespace Client.Models
                     .Build();
 
                 this.hubConnection.On<string>("StatusMessage", this.OnStatusMessageReceived);
-                this.hubConnection.On<MessageData>("GameStatus", this.OnGameStatusReceived);
+                this.hubConnection.On<MessageData>("GameStatus", this.OnGameCardReceived);
 
                 await this.hubConnection.StartAsync();
             }
@@ -209,59 +219,9 @@ namespace Client.Models
         /// Called when a game status has been received from the server.
         /// </summary>
         /// <param name="status">The status.</param>
-        private void OnGameStatusReceived(MessageData status)
+        private void OnGameCardReceived(MessageData data)
         {
-            //this.logger.LogInformation("[OnGameStatusReceived] GameId: {0}", new object[] { status.GameId });
-            
-            //if (this.CurrentGameStatus == null || status.IsNewGame)
-            //{
-            //   /* if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
-            //    {
-            //       // this.PlayerTwo = this.RequestingOrEnemyPlayer;
-            //        //this.PlayerOne = this.ClientPlayer;
-            //    }
-            //    else
-            //    {
-            //        //this.PlayerOne = this.RequestingOrEnemyPlayer;
-            //       // this.PlayerTwo = this.ClientPlayer;
-            //    }
-
-            //    //this.GameIsActive = true;*/
-            //}
-
-            /*if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
-            {
-                this.myTurn = true;
-                this.timer = new System.Timers.Timer(10000) { AutoReset = false };
-                this.timer.Start();
-                this.timer.Elapsed += this.Timer_Elapsed;
-            }*/
-
-            this.CurrentGameStatus = status;
-
-            //if (this.ClientPlayer.Player.ConnectionId == status.CurrentPlayerId)
-            //{
-            //    this.ActivePlayerName = this.ClientPlayer.PlayerName;
-            //}
-            //else
-            //{
-            //    this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
-            //}
-
-            //if (status.CurrentPlayerMarker == 1)
-            //{
-            //}
-            //else
-            //{
-            //}
-
-            //if (status.IndexedGame.All<int>(x => x == 0))
-            //{
-            //    this.ResetField();
-            //}
-
-          //  this.PlayerOne.Wins = status.WinsPlayerOne;
-          //  this.PlayerTwo.Wins = status.WinsPlayerTwo;
+            this.FireGameCardReceived(data);
         }
 
         /// <summary>
@@ -303,46 +263,29 @@ namespace Client.Models
         }
 
 
-        /// <summary>
-        /// This command is used when a game element button is clicked.
-        /// Checks if the player is allowed to place his sign and sends the information to the server.
-        /// </summary>
-        /// <param name="cell">The cell that was clicked.</param>
-        /// <returns>A Task that represents the asynchronous method.</returns>
-        private async Task ExecutePlayerClickAsync(GameCellVM cell)
+        private async Task ExecuteSendPlayingCard(MessageData data)
         {
             this.timer.Stop();
+            if (this.GameIsActive)
+            {
+                if (this.myTurn)
+                {
+                    this.myTurn = false;
 
-                //if (this.GameIsActive)
-                //{
-                    //if (this.CurrentGameStatus.IndexedGame[cell.Index] == 0) // && this.CurrentGameStatus.CurrentPlayerId == this.ClientPlayer.Player.ConnectionId && this.myTurn)
-                    //{
-                    //    cell.PlayerMark = this.CurrentGameStatus.CurrentPlayerMarker;
-                    //    this.myTurn = false;
-
-                    //    var status = new MessageData
-                    //    {
-                    //       // CurrentPlayerId = this.ClientPlayer.Player.ConnectionId,
-                    //        UpdatedPosition = cell.Index,
-                    //        GameId = this.CurrentGameStatus.GameId
-                    //    };
-
-                    //   // this.ActivePlayerName = this.RequestingOrEnemyPlayer.PlayerName;
-
-                    //    try
-                    //    {
-                    //        await this.hubConnection.SendAsync("UpdateGameStatus", status);
-                    //    }
-                    //    catch (HttpRequestException)
-                    //    {
-                    //        this.StatusMessage = "Unable to reach server. Please try again later.";
-                    //    }
-                    //    catch (Exception)
-                    //    {
-                    //        this.StatusMessage = "An unknown error occured. Please try again later.";
-                    //    }
-                    //}
-                //}                  
+                    try
+                    {
+                        await this.hubConnection.SendAsync("UpdatePlayerPlayedCard", data);
+                    }
+                    catch (HttpRequestException)
+                    {
+                        this.StatusMessage = "Unable to reach server. Please try again later.";
+                    }
+                    catch (Exception)
+                    {
+                        this.StatusMessage = "An unknown error occured. Please try again later.";
+                    }
+                }
+            }
         }
     }
 }

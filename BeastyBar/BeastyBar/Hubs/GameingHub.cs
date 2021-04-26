@@ -158,22 +158,10 @@ namespace BeastyBar.Hubs
         /// </summary>
         /// <param name="update">The GameStatus to update.</param>
         /// <returns>A Task that represents the asynchronous method.</returns>
-        public async Task UpdateGameStatus(MessageData update)
+        public async Task UpdatePlayerPlayedCard(MessageData update)
         {
-            //var games = new List<Game>(await this.mainService.GetGamesAsync());
-            //var game = games.SingleOrDefault(g => g.GameId == update.GameId);
-
-            //if (game != null)
-            //{
-            //    if (game.PlayerOne.ConnectionId == update.CurrentPlayerId)
-            //    {
-            //        await this.UpdatePlayerSpecificGameStatus(game, update.UpdatedPosition, game.PlayerOne);
-            //    }
-            //    else if (game.PlayerTwo.ConnectionId == update.CurrentPlayerId)
-            //    {
-            //        await this.UpdatePlayerSpecificGameStatus(game, update.UpdatedPosition, game.PlayerTwo);
-            //    }
-            //}
+            //await this.UpdatePlayerSpecificGameCard(update);
+            await Clients.Client(update.CurrentPlayerId).SendAsync("GameStatus", update);
         }
 
         /// <summary>
@@ -247,47 +235,9 @@ namespace BeastyBar.Hubs
             //    await Clients.All.SendAsync("ReceivePlayersAsync", await this.mainService.GetPlayersNotInGameAsync());
             //}
 
-            /// <summary>
-            /// Updates the game after a move and sends the game status to concerned clients.
-            /// </summary>
-            /// <param name="game">The game instance.</param>
-            /// <param name="updatedPosition">The updated position.</param>
-            /// <param name="player">The player instance.</param>
-            /// <returns>A Task that represents the asynchronous method.</returns>
-            //private async Task UpdatePlayerSpecificGameStatus(Game game, int updatedPosition, Player player)
+            //private async Task UpdatePlayerSpecificGameCard(MessageData data)
             //{
-            //    if (game.GameOver)
-            //    {
-            //        return;
-            //    }
-
-            //    if (game.IsMoveValid(updatedPosition, player))
-            //    {
-            //        var gameFinished = game.MakeMove(updatedPosition, player);
-
-            //        if (gameFinished)
-            //        {
-            //            // db call
-            //            await Clients.Clients(game.PlayerOne.ConnectionId, game.PlayerTwo.ConnectionId).SendAsync("StatusMessage", game.EndMessage + " New game in 5 seconds");
-            //            var oldGameStatus = this.CreateNewGameStatus(game, false, updatedPosition);
-            //            game.GameOver = true;
-
-            //            await Clients.Client(game.CurrentPlayer.ConnectionId).SendAsync("GameStatus", oldGameStatus);
-            //            await Task.Delay(5000);
-
-            //            game.NewGameSetup();
-            //            var gameStatus = this.CreateNewGameStatus(game, true, updatedPosition);
-
-            //            game.GameOver = false;
-            //            await Clients.Clients(game.PlayerOne.ConnectionId, game.PlayerTwo.ConnectionId).SendAsync("GameStatus", gameStatus);
-            //        }
-            //        else
-            //        {
-            //            var gameStatus = this.CreateNewGameStatus(game, false, updatedPosition);
-
-            //            await Clients.Client(game.CurrentPlayer.ConnectionId).SendAsync("GameStatus", gameStatus);
-            //        }
-            //    }
+            //   await Clients.Client(data.CurrentPlayerId).SendAsync("GameStatus", data);
             //}
 
             /// <summary>
