@@ -8,11 +8,10 @@
     using System.Windows.Media;
     using BeastyBarGameLogic.Animals;
     using BeastyBarGameLogic.Animals.Species;
-    using BeastyBarGameLogic.GamePlayer;
     using BeastyBarGameLogic.GamePlayer.AnimalSettingsProvider;
-    using BeastyBarGameLogic.GamePlayer.GamePlayerEventArgs;
     using BeastyBarGameLogic.GamePlayer.NetworkCommunication;
     using Client.ClassesForView;
+    using Client.Models;
     using Client.ViewModels.Events;
 
     public class GameManagerVM : INotifyPropertyChanged

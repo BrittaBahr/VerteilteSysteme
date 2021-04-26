@@ -6,7 +6,7 @@
 // <summary>This file represents a game request to play with another player.</summary>
 //-----------------------------------------------------------------------
 
-namespace GameLibrary
+namespace BeastyBarGameLogic.NetworkMessaging
 {
     using System;
     using Newtonsoft.Json;
@@ -23,22 +23,22 @@ namespace GameLibrary
         /// </summary>
         /// <param name="enemy">The enemy.</param>
         /// <param name="requestPlayer">The requesting player.</param>
-        //[JsonConstructor]
-        //public GameRequest(/*Player enemy, Player requestPlayer*/)
-        //{
-        //    //this.Enemy = enemy;
-        //    //this.RequestingPlayer = requestPlayer;
+        [JsonConstructor]
+        public GameRequest(/*Player enemy, Player requestPlayer*/)
+        {
+            //this.Enemy = enemy;
+            //this.RequestingPlayer = requestPlayer;
 
-        //    Random r = new Random();
-        //    this.RequestID = r.Next(999, 1234567) + r.Next(999, 1234567);
-        //}
+            Random r = new Random();
+            this.RequestID = r.Next(999, 1234567) + r.Next(999, 1234567);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRequest"/> class.
         /// </summary>
-        public GameRequest()
-        {
-        }
+        //public GameRequest()
+        //{
+        //}
 
         /// <summary>
         /// Gets or sets a value indicating whether a game request has been accepted.
@@ -72,12 +72,12 @@ namespace GameLibrary
         /// </value>
         //public Player RequestingPlayer { get; set; }
 
-        ///// <summary>
-        ///// Gets or sets the player the request is sent to.
-        ///// </summary>
-        ///// <value>
-        ///// The player the request is sent to.
-        ///// </value>
-        //public Player Enemy { get; set; }
+        /// <summary>
+        /// Gets or sets the player the request is sent to.
+        /// </summary>
+        /// <value>
+        /// The player the request is sent to.
+        /// </value>
+        //public BeastyBarPlayer Enemy { get; set; }
     }
 }

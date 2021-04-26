@@ -1,6 +1,6 @@
 ﻿using Client.Models;
 using Client.Services;
-using GameLibrary;
+using BeastyBarGameLogic.NetworkMessaging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "SY/vcEkclcLphBAEb9AIT9p+LrLzC7ZYQ1rdsi3ubo9faQnObvP0lNe2/YhCnLq2PdtHVHexBFA66ccMlwnqfA==",
+  "dgSpecHash": "4Rftvh1tKsamPwThDr5ABbVj2lLRQTvfbL4SzZXzsv+ByipqA57hZjiM2uSOBqfG2FEjilg3PHSYe38ffCoQDQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SvenjaBahr\\Desktop\\GIIIT\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\britt\\Desktop\\VerteilteSysteme\\BeastyBar\\BeastyBarGameLogic\\BeastyBarGameLogic.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\britt\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -14,8 +14,8 @@ namespace Client
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using BeastyBarGameLogic.GamePlayer;
     using Client.ClassesForView;
+    using Client.Models;
     using Client.ViewModel;
 
     /// <summary>

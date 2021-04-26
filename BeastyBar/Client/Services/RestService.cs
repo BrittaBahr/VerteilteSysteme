@@ -1,4 +1,4 @@
-﻿using GameLibrary;
+﻿using BeastyBarGameLogic.NetworkMessaging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

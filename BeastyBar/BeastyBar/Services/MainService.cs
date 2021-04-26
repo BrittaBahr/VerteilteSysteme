@@ -5,20 +5,21 @@ namespace BeastyBar.Services
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using GameLibrary;
+    using BeastyBarGameLogic.NetworkMessaging;
     using Microsoft.Extensions.Logging;
+    using Client.Models;
     
     /// <summary>
     /// This file represents a main service for the game which handles the different requests.
     /// </summary>
     public class MainService : IMainService
-    {     
+    {
         /// <summary>
         /// This field is used to save the players.
         /// </summary>
-        private readonly List<Player> playersOnServer = new List<Player>();
+        private readonly List<BeastyBarPlayer> playersOnServer = new List<BeastyBarPlayer>();
 
-        private readonly Dictionary<Player, string> registeredPlayers = new Dictionary<Player, string>();
+        private readonly Dictionary<BeastyBarPlayer, string> registeredPlayers = new Dictionary<BeastyBarPlayer, string>();
 
         /// <summary>
         /// This field is used to save the games.
@@ -51,9 +52,9 @@ namespace BeastyBar.Services
         /// <returns>
         /// The player which has been added.
         /// </returns>
-        public Task<Player> AddPlayerAsync(Player player)
+        public Task<BeastyBarPlayer> AddPlayerAsync(BeastyBarPlayer player)
         {
-            this.logger.LogInformation("[AddPlayerAsync] ConnectionId: {0}, PlayerName: {1}", new object[] { player.ConnectionId, player.PlayerName });
+            this.logger.LogInformation("[AddPlayerAsync] ConnectionId: {0}, PlayerName: {1}", new object[] { player.PlayerId, player.Name });
 
             this.playersOnServer.Add(player);
 
@@ -66,10 +67,10 @@ namespace BeastyBar.Services
         /// <returns>
         /// The collection of all players.
         /// </returns>
-        public Task<IEnumerable<Player>> GetPlayersAsync()
+        public Task<IEnumerable<BeastyBarPlayer>> GetPlayersAsync()
         {
             this.logger.LogInformation("[GetPlayersAsync]");
-            return Task.FromResult<IEnumerable<Player>>(this.playersOnServer);
+            return Task.FromResult<IEnumerable<BeastyBarPlayer>>(this.playersOnServer);
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace BeastyBar.Services
         /// </returns>
         public Task<GameRequest> AddGameRequestAsync(GameRequest gameRequest)
         {
-            this.logger.LogInformation("[AddGameRequestAsync] Player {0} requests a game with player {1}", new object[] { gameRequest.RequestingPlayer.PlayerName, gameRequest.Enemy.PlayerName });
+            //this.logger.LogInformation("[AddGameRequestAsync] Player {0} requests a game with player {1}", new object[] { gameRequest.RequestingPlayer.PlayerName, gameRequest.Enemy.PlayerName });
             this.gameRequests.Add(gameRequest);
             return Task.FromResult(gameRequest);
         }
@@ -120,7 +121,7 @@ namespace BeastyBar.Services
         /// </returns>
         public Task<GameRequest> RemoveRequestAsync(GameRequest gameRequest, bool accepted)
         {
-            this.logger.LogInformation($"[RemoveRequestAsync] Game request from player {0} to player {1} has been accepted: {accepted.ToString()}", new object[] { gameRequest.RequestingPlayer.PlayerName, gameRequest.Enemy.PlayerName });
+           // this.logger.LogInformation($"[RemoveRequestAsync] Game request from player {0} to player {1} has been accepted: {accepted.ToString()}", new object[] { gameRequest.RequestingPlayer.PlayerName, gameRequest.Enemy.PlayerName });
             this.gameRequests.Remove(gameRequest);
             return Task.FromResult(gameRequest);
         }
@@ -132,9 +133,10 @@ namespace BeastyBar.Services
         /// <returns>
         /// The player which has been removed.
         /// </returns>
-        public Task<Player> RemovePlayerAsync(Player player)
+        public Task<BeastyBarPlayer> RemovePlayerAsync(BeastyBarPlayer player)
         {
-            this.logger.LogInformation("[RemovePlayerAsync] ConnectionId: {0}, PlayerName: {1}", new object[] { player.ConnectionId, player.PlayerName });
+           // this.logger.LogInformation("[RemovePlayerAsync] ConnectionId: {0}, PlayerName: {1}", new object[] { player.ConnectionId, player.PlayerName });
+            
             this.playersOnServer.Remove(player);
             return Task.FromResult(player);
         }
@@ -148,7 +150,7 @@ namespace BeastyBar.Services
         /// </returns>
         public Task<Game> AddGameAsync(Game game)
         {
-            this.logger.LogInformation("[AddGameAsync] PlayerOneName: {0}, PlayerTwoName: {1}", new object[] { game.PlayerOne.PlayerName, game.PlayerTwo.PlayerName });
+          //  this.logger.LogInformation("[AddGameAsync] PlayerOneName: {0}, PlayerTwoName: {1}", new object[] { game.PlayerOne.PlayerName, game.PlayerTwo.PlayerName });
             this.games.Add(game);
             return Task.FromResult(game);
         }
@@ -162,7 +164,7 @@ namespace BeastyBar.Services
         /// </returns>
         public Task<Game> RemoveGameAsync(Game game)
         {
-            this.logger.LogInformation("[RemoveGameAsync] PlayerOneName: {0}, PlayerTwoName: {1}", new object[] { game.PlayerOne.PlayerName, game.PlayerTwo.PlayerName });
+            //this.logger.LogInformation("[RemoveGameAsync] PlayerOneName: {0}, PlayerTwoName: {1}", new object[] { game.PlayerOne.PlayerName, game.PlayerTwo.PlayerName });
             this.games.Remove(game);
             return Task.FromResult(game);
         }
@@ -173,28 +175,28 @@ namespace BeastyBar.Services
         /// <returns>
         /// The collection of players who are not in a game.
         /// </returns>
-        public Task<IEnumerable<Player>> GetPlayersNotInGameAsync()
+        public Task<IEnumerable<BeastyBarPlayer>> GetPlayersNotInGameAsync()
         {
             this.logger.LogInformation("[GetPlayersNotInGameAsync]");
 
-            List<Player> playersInAGame = new List<Player>();
+            List<BeastyBarPlayer> playersInAGame = new List<BeastyBarPlayer>();
 
             if (this.games.Count == 0)
             {
-                return Task.FromResult<IEnumerable<Player>>(this.playersOnServer);
+                return Task.FromResult<IEnumerable<BeastyBarPlayer>>(this.playersOnServer);
             }
 
-            foreach (var game in this.games)
-            {
-                playersInAGame.Add(game.PlayerOne);
-                playersInAGame.Add(game.PlayerTwo);
-            }
+            //foreach (var game in this.games)
+            //{
+            //    playersInAGame.Add(game.PlayerOne);
+            //    playersInAGame.Add(game.PlayerTwo);
+            //}
 
-            var playersNotInGame = new List<Player>();
+            var playersNotInGame = new List<BeastyBarPlayer>();
 
             foreach (var playerOnServer in this.playersOnServer)
             {
-                var player = playersInAGame.SingleOrDefault(x => playerOnServer.ConnectionId == x.ConnectionId);
+                var player = playersInAGame.SingleOrDefault(x => playerOnServer.PlayerId == x.PlayerId);
 
                 if (player == null)
                 {
@@ -202,7 +204,7 @@ namespace BeastyBar.Services
                 }
             }
 
-            return Task.FromResult<IEnumerable<Player>>(playersNotInGame);
+            return Task.FromResult<IEnumerable<BeastyBarPlayer>>(playersNotInGame);
         }
 
         /// <summary>
@@ -219,7 +221,7 @@ namespace BeastyBar.Services
 
             foreach (var item in this.games)
             {
-                simpleGameInformation.Add(new SimpleGameInformation(item.PlayerOne.PlayerName, item.PlayerTwo.PlayerName));
+            //    simpleGameInformation.Add(new SimpleGameInformation(item.PlayerOne.PlayerName, item.PlayerTwo.PlayerName));
             }
 
             return Task.FromResult(simpleGameInformation);

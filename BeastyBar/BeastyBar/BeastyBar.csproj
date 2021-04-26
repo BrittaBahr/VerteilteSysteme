@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameLibrary\GameLibrary.csproj" />
+    <ProjectReference Include="..\BeastyBarGameLogic\BeastyBarGameLogic.csproj" />
+    <ProjectReference Include="..\Client\Client.csproj" />
   </ItemGroup>
 
 

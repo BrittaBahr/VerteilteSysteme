@@ -1,16 +1,10 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="Game.cs" company="FHWN">
-// Copyright (c) FHWN. All rights reserved.
-// </copyright>
-// <author>Felix Brandstetter, Niklas Strasser, Yannick Gruber</author>
-// <summary>This file represents a game which contains all the important information for the game.</summary>
-//-----------------------------------------------------------------------
+﻿
 
-namespace GameLibrary
+namespace BeastyBarGameLogic.NetworkMessaging
 {
     using System;
     using System.Collections.Generic;
-    using GameLibrary;
+    using BeastyBarGameLogic.NetworkMessaging;
 
     /// <summary>
     /// Represents a game which contains all the important information for the game.
@@ -20,7 +14,7 @@ namespace GameLibrary
         /// <summary>
         /// This field is used to save the list of win conditions.
         /// </summary>
-        private readonly List<WinCondition> winConditions;
+        //private readonly List<WinCondition> winConditions;
 
         /// <summary>
         /// This field is used to save player two.
@@ -49,17 +43,17 @@ namespace GameLibrary
         /// <param name="two">The second player.</param>
         public Game(/*Player one, Player two*/)
         {
-            this.winConditions = new List<WinCondition>()
-            {
-                new WinCondition(0, 3, 6),
-                new WinCondition(1, 4, 7),
-                new WinCondition(2, 5, 8),
-                new WinCondition(0, 1, 2),
-                new WinCondition(3, 4, 5),
-                new WinCondition(6, 7, 8),
-                new WinCondition(0, 4, 8),
-                new WinCondition(2, 4, 6)
-            };
+            //this.winConditions = new List<WinCondition>()
+            //{
+            //    new WinCondition(0, 3, 6),
+            //    new WinCondition(1, 4, 7),
+            //    new WinCondition(2, 5, 8),
+            //    new WinCondition(0, 1, 2),
+            //    new WinCondition(3, 4, 5),
+            //    new WinCondition(6, 7, 8),
+            //    new WinCondition(0, 4, 8),
+            //    new WinCondition(2, 4, 6)
+            //};
 
             //this.playerOne = one;
             //this.playerTwo = two;
@@ -224,27 +218,27 @@ namespace GameLibrary
             {
                 if (this.Turns > 4 && !this.GameOver)
                 {
-                    foreach (var condition in this.winConditions)
-                    {
-                        foreach (var index in condition.Condition)
-                        {
-                            //if (this.CurrentPlayer.MarkedPositions.Contains(index))
-                            //{
-                            //    isWin = true;
-                            //    continue;
-                            //}
-                            //else
-                            //{
-                            //    isWin = false;
-                            //    break;
-                            //}
-                        }
+                    //foreach (var condition in this.winConditions)
+                    //{
+                    //    foreach (var index in condition.Condition)
+                    //    {
+                    //        //if (this.CurrentPlayer.MarkedPositions.Contains(index))
+                    //        //{
+                    //        //    isWin = true;
+                    //        //    continue;
+                    //        //}
+                    //        //else
+                    //        //{
+                    //        //    isWin = false;
+                    //        //    break;
+                    //        //}
+                    //    }
 
-                        if (isWin)
-                        {
-                            break;
-                        }
-                    }
+                    //    if (isWin)
+                    //    {
+                    //        break;
+                    //    }
+                    //}
                 }
             }
 
