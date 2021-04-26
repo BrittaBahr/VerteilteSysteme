@@ -263,7 +263,7 @@ namespace Client.Models
         }
 
 
-        private async Task ExecuteSendPlayingCard(MessageData data)
+        public async Task ExecuteSendPlayingCard(MessageData data)
         {
             this.timer.Stop();
             if (this.GameIsActive)

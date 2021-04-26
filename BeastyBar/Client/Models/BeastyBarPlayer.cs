@@ -11,6 +11,7 @@
     using BeastyBarGameLogic.GamePlayer.GamePlayerEventArgs;
     using BeastyBarGameLogic.GamePlayer.GamePlayerException;
     using BeastyBarGameLogic.GamePlayer.NetworkCommunication;
+    using BeastyBarGameLogic.NetworkMessaging;
 
     public class BeastyBarPlayer
     {
@@ -113,7 +114,13 @@
             set
             {
                 this.networkClient = value ?? throw new ArgumentNullException("It can not be null.");
+                this.networkClient.GameCardReceived += HandlingGameCardReceived;
             }
+        }
+
+        private void HandlingGameCardReceived(object sender, GameCardReceivedEventArgs e)
+        {
+            // TODO: a other player have playes a card
         }
 
         public string CurrentActivePlayerName
@@ -164,19 +171,8 @@
 
         public event EventHandler<GameEndedEventArgs> GameEnded;
 
-        public void PlayCard(Animal handcardAnimal)
+        public async void PlayCard(Animal handcardAnimal)
         {
-            //this.currentActivePlayer = this.communicator.GetCurrentPlayer();
-
-            //if (!this.otherPlayers.Contains(this.currentActivePlayer))
-            //{
-            //    throw new NotValidPlayerException();
-            //}
-
-            //if (this.currentActivePlayer.PlayerId != this.PlayerId)
-            //{
-            //    throw new NotOnTurnException();
-            //}
 
             if (!this.handcards.Contains(handcardAnimal))
             {
@@ -188,7 +184,11 @@
             animals = handcardAnimal.Queue(animals, -1, false);
             this.UpdateQueue(animals, handcardAnimal);
             this.Handcards.Remove(handcardAnimal);
-            //this.communicator.SendPlayedAnimal(this.PlayerId, handcardAnimal);
+
+            // newwork commmunication
+            await this.networkClient.ExecuteSendPlayingCard(new MessageData(this.PlayerId.ToString(), handcardAnimal));
+
+
             this.DoAnimalPushingInQueue();
             this.GetIntoClub();
             this.GetRandomHandcard();
